@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6e267f90a243fc4eab7f443ba94c66d, type: 3}
+  m_Name: ScreensConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Screens.Configs.ScreensConfig
+  _screenPrefabs:
+  - {fileID: 922919065962208109, guid: 3cec1176fab4ba247b5dba719dce5006, type: 3}
+  - {fileID: 2076817484251446369, guid: 56ea1b064f5e8c54cbc2a9fd74799a05, type: 3}

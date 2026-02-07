@@ -1,4 +1,5 @@
 ﻿using System;
+using Balls.Interfaces;
 using Common.Interfaces;
 using CoreGameLoop.Configs;
 using CoreGameLoop.Interfaces;
@@ -16,6 +17,9 @@ namespace CoreGameLoop.Implementations.Systems
         private IGameContainer _gameContainer;
         private IGameFieldCreator _gameFieldCreator;
         private IRacketSystem _racketSystem;
+        private IBallCreator _ballCreator;
+        private IBallMover _ballMover;
+        private IBallInteractor _ballInteractor;
 
         private CoreGameLoopConfig _coreGameLoopConfig;
 
@@ -31,12 +35,18 @@ namespace CoreGameLoop.Implementations.Systems
             IGameContainer gameContainer,
             IGameFieldCreator gameFieldCreator,
             IRacketSystem racketSystem,
+            IBallCreator ballCreator,
+            IBallMover ballMover,
+            IBallInteractor ballInteractor,
             CoreGameLoopConfig coreGameLoopConfig)
         {
             _screenSystem = screenSystem;
             _gameContainer = gameContainer;
             _gameFieldCreator = gameFieldCreator;
             _racketSystem = racketSystem;
+            _ballCreator = ballCreator;
+            _ballMover = ballMover;
+            _ballInteractor = ballInteractor;
 
             _coreGameLoopConfig = coreGameLoopConfig;
         }
@@ -64,6 +74,7 @@ namespace CoreGameLoop.Implementations.Systems
             endGameScreen.ContinueButton.onClick.AddListener(StartGameLoop);
             endGameScreen.ToMenuButton.onClick.AddListener(ToMenuButtonClick);
 
+            _ballCreator.OnDestroyBall += CheckLose;
         }
 
         ///  <inheritdoc />
@@ -73,8 +84,10 @@ namespace CoreGameLoop.Implementations.Systems
 
             _gameFieldCreator.CreateGameField();
             _racketSystem.CreateRacket();
+            _ballCreator.CreateBall();
 
             _racketSystem.SetControlActive(true);
+            _ballMover.SetActive(true);
         }
 
         /// <summary>
@@ -99,8 +112,11 @@ namespace CoreGameLoop.Implementations.Systems
         /// <param name="win"></param>
         private void EndGame(bool win)
         {
-            var gameScreen = _screenSystem.ShowScreen<IEndGameScreen>();
+            var endGameScreen = _screenSystem.ShowScreen<IEndGameScreen>();
+            endGameScreen.ResultText.text = win ? _coreGameLoopConfig.WinLabel : _coreGameLoopConfig.LoseLabel;
+            
             _racketSystem.SetControlActive(false);
+            _ballMover.SetActive(false);
         }
 
         /// <summary>
@@ -110,6 +126,7 @@ namespace CoreGameLoop.Implementations.Systems
         {
             _screenSystem.ShowScreen<IPauseScreen>(false);
             _racketSystem.SetControlActive(false);
+            _ballMover.SetActive(false);
         }
 
         /// <summary>
@@ -119,6 +136,7 @@ namespace CoreGameLoop.Implementations.Systems
         {
             _screenSystem.HideScreen<IPauseScreen>();
             _racketSystem.SetControlActive(true);
+            _ballMover.SetActive(true);
         }
 
         /// <summary>
@@ -127,6 +145,19 @@ namespace CoreGameLoop.Implementations.Systems
         private void ToMenuButtonClick()
         {
             OnBackToMenu?.Invoke();
+        }
+
+        /// <summary>
+        /// Проверить проигрыш
+        /// </summary>
+        private void CheckLose()
+        {
+            if(_ballInteractor.BallViews.Count > 0)
+            {
+                return;
+            }
+
+            Lose();
         }
     }
 }

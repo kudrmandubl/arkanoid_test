@@ -1,5 +1,4 @@
 ﻿using Common.Interfaces;
-using DG.Tweening;
 using Inputs.Interfaces;
 using Racket.Configs;
 using Racket.Data;
@@ -14,6 +13,7 @@ namespace Racket.Implementations.Systems
         private IGameContainer _gameContainer;
         private IInputCatcher _inputCatcher;
         private IMainCamera _mainCamera;
+        private IRacketInteractor _racketInteractor;
 
         private RacketConfig _racketConfig;
 
@@ -26,11 +26,13 @@ namespace Racket.Implementations.Systems
         public RacketSystem(IGameContainer gameContainer,
             IInputCatcher inputCatcher,
             IMainCamera mainCamera,
+            IRacketInteractor racketInteractor,
             RacketConfig racketConfig)
         {
             _gameContainer = gameContainer;
             _inputCatcher = inputCatcher;
             _mainCamera = mainCamera;
+            _racketInteractor = racketInteractor;
 
             _racketConfig = racketConfig;
 
@@ -45,6 +47,7 @@ namespace Racket.Implementations.Systems
                 _racketView = GameObject.Instantiate(_racketConfig.RacketViewPrefab, _gameContainer.CoreContainer);
                 _racketView.SizableTransform.localScale = Vector2.one * _racketConfig.RacketSize;
                 _racketView.RacketData = new RacketData();
+                _racketInteractor.SetRacket(_racketView);
             }
 
             _racketView.Transform.localPosition = _racketConfig.RacketPosition;
@@ -85,7 +88,7 @@ namespace Racket.Implementations.Systems
 
             var racketPosition = _racketView.Transform.position;
             racketPosition.x = pointerWorldPosition.x;
-            racketPosition = ApplyBorders(racketPosition);
+            racketPosition = ApplyBorders(racketPosition, _racketView.RacketData.Width);
             _racketView.Transform.position = racketPosition;
         }
 
@@ -94,14 +97,14 @@ namespace Racket.Implementations.Systems
         /// </summary>
         /// <param name="position"></param>
         /// <returns></returns>
-        private Vector3 ApplyBorders(Vector3 position)
+        private Vector3 ApplyBorders(Vector3 position, float width)
         {
             // Получить границы экрана в мировых координатах
             float screenLeft = _mainCamera.Camera.ScreenToWorldPoint(new Vector3(0, 0, _mainCamera.Camera.transform.position.z)).x;
             float screenRight = _mainCamera.Camera.ScreenToWorldPoint(new Vector3(Screen.width, 0, _mainCamera.Camera.transform.position.z)).x;
 
-            // Учитывать ширину ракетки (scale.x) и размер
-            float racketHalfWidth = _racketView.RacketData.Width / 2f;
+            // Учитывать ширину ракетки
+            float racketHalfWidth = width / 2f;
 
             // Ограничить позицию так, чтобы ракетка не выходила за границы
             position.x = Mathf.Clamp(position.x, screenLeft + racketHalfWidth, screenRight - racketHalfWidth);

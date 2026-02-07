@@ -14,6 +14,7 @@ namespace Racket.DI
         /// </summary>
         public override void InstallBindings()
         {
+            Container.Bind<IRacketInteractor>().To<RacketInteractor>().AsCached();
             Container.Bind<IRacketSystem>().To<RacketSystem>().AsCached();
         }
     }

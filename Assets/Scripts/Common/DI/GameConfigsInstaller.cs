@@ -1,4 +1,5 @@
-﻿using Common.Configs;
+﻿using Balls.Configs;
+using Common.Configs;
 using CoreGameLoop.Configs;
 using GameField.Configs;
 using MainMenu.Configs;
@@ -21,6 +22,7 @@ namespace Common.DI
         [SerializeField] private MainMenuConfig _mainMenuConfig;
         [SerializeField] private GameFieldConfig _gameFieldConfig;
         [SerializeField] private RacketConfig _racketConfig;
+        [SerializeField] private BallsConfig _ballsConfig;
 
         /// <summary>
         /// Установить зависимости
@@ -33,6 +35,7 @@ namespace Common.DI
             Container.BindInstance<MainMenuConfig>(_mainMenuConfig);
             Container.BindInstance<GameFieldConfig>(_gameFieldConfig);
             Container.BindInstance<RacketConfig>(_racketConfig);
+            Container.BindInstance<BallsConfig>(_ballsConfig);
         }
     }
 }

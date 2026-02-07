@@ -19,7 +19,7 @@ namespace Racket.Configs
         public RacketView RacketViewPrefab => _racketViewPrefab;
 
         /// <summary>
-        /// Ширина ракетки
+        /// Размеры ракетки
         /// </summary>
         public Vector2 RacketSize => _racketSize;
 

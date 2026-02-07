@@ -1,0 +1,37 @@
+﻿using Balls.Implementations.Views;
+using UnityEngine;
+
+namespace Balls.Configs
+{
+    /// <summary>
+    /// Конфиг шариков
+    /// </summary>
+    [CreateAssetMenu(fileName = "BallsConfig", menuName = "Configs/BallsConfig")]
+    public class BallsConfig : ScriptableObject
+    {
+        [SerializeField] private BallView _ballViewPrefab;
+        [SerializeField] private Vector2 _ballSize;
+        [SerializeField] private float _maxBallStartDirectionX;
+        [SerializeField] private float _ballSpeed;
+
+        /// <summary>
+        /// Префаб шарика
+        /// </summary>
+        public BallView BallViewPrefab => _ballViewPrefab;
+
+        /// <summary>
+        /// Ширина шарика
+        /// </summary>
+        public Vector2 BallSize => _ballSize;
+
+        /// <summary>
+        /// Максимальное начальное направление шарика по X
+        /// </summary>
+        public float MaxBallStartDirectionX => _maxBallStartDirectionX;
+
+        /// <summary>
+        /// Скорость шарика
+        /// </summary>
+        public float BallSpeed => _ballSpeed;
+    }
+}

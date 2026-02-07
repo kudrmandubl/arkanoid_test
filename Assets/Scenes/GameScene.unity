@@ -199,6 +199,7 @@ Transform:
   - {fileID: 1771906437}
   - {fileID: 731142510}
   - {fileID: 1187300760}
+  - {fileID: 781873101}
   - {fileID: 1734952590}
   - {fileID: 2096186406}
   - {fileID: 1295612504}
@@ -514,6 +515,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Common.CanvasWithKey
   _key: GameSceneCanvasKey
+--- !u!1 &781873100
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 781873101}
+  - component: {fileID: 781873102}
+  m_Layer: 0
+  m_Name: BallsInstaller
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &781873101
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781873100}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 316106391}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &781873102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 781873100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c3dc7cd965606346a0599d999c7becc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Balls.DI.BallsInstaller
 --- !u!1 &919948236
 GameObject:
   m_ObjectHideFlags: 0
@@ -699,6 +744,7 @@ MonoBehaviour:
   - {fileID: 1771906438}
   - {fileID: 731142511}
   - {fileID: 1187300761}
+  - {fileID: 781873102}
   - {fileID: 1734952591}
   - {fileID: 2096186407}
   - {fileID: 1295612505}

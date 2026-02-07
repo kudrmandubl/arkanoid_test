@@ -47,7 +47,6 @@ namespace MainMenu.Implementations.Systems
             mainMenuScreen.PlayButton.onClick.AddListener(PlayButtonClick);
 
             _mainMenuParallax.Initialize();
-            _coreGameLoopSystem.Initialize();
 
             _coreGameLoopSystem.OnBackToMenu += BackFromCore;
         }
@@ -67,6 +66,8 @@ namespace MainMenu.Implementations.Systems
         /// </summary>
         private void PlayButtonClick()
         {
+            _coreGameLoopSystem.Initialize();
+
             _gameContainer.CoreContainer.gameObject.SetActive(true);
 
             _coreGameLoopSystem.StartGameLoop();

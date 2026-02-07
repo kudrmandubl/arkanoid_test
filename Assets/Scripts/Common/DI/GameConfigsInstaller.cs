@@ -1,5 +1,6 @@
 ﻿using Common.Configs;
 using CoreGameLoop.Configs;
+using GameField.Configs;
 using MainMenu.Configs;
 using Screens.Configs;
 using UnityEngine;
@@ -17,6 +18,7 @@ namespace Common.DI
         [SerializeField] private TweenAnimationsConfig _tweenAnimationsConfig;
         [SerializeField] private CoreGameLoopConfig _coreGameLoopConfig;
         [SerializeField] private MainMenuConfig _mainMenuConfig;
+        [SerializeField] private GameFieldConfig _gameFieldConfig;
 
         /// <summary>
         /// Установить зависимости
@@ -27,6 +29,7 @@ namespace Common.DI
             Container.BindInstance<TweenAnimationsConfig>(_tweenAnimationsConfig);
             Container.BindInstance<CoreGameLoopConfig>(_coreGameLoopConfig);
             Container.BindInstance<MainMenuConfig>(_mainMenuConfig);
+            Container.BindInstance<GameFieldConfig>(_gameFieldConfig);
         }
     }
 }

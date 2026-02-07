@@ -2,6 +2,7 @@
 using Common.Interfaces;
 using CoreGameLoop.Configs;
 using CoreGameLoop.Interfaces;
+using GameField.Interfaces;
 using Screens.Interfaces;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace CoreGameLoop.Implementations.Systems
     {
         private IScreenSystem _screenSystem;
         private IGameContainer _gameContainer;
+        private IGameFieldCreator _gameFieldCreator;
 
         private CoreGameLoopConfig _coreGameLoopConfig;
 
@@ -25,10 +27,12 @@ namespace CoreGameLoop.Implementations.Systems
         /// </summary>
         public CoreGameLoopSystem(IScreenSystem screenSystem,
             IGameContainer gameContainer,
+            IGameFieldCreator gameFieldCreator,
             CoreGameLoopConfig coreGameLoopConfig)
         {
             _screenSystem = screenSystem;
             _gameContainer = gameContainer;
+            _gameFieldCreator = gameFieldCreator;
 
             _coreGameLoopConfig = coreGameLoopConfig;
         }
@@ -55,6 +59,8 @@ namespace CoreGameLoop.Implementations.Systems
             var endGameScreen = _screenSystem.GetScreen<IEndGameScreen>();
             endGameScreen.ContinueButton.onClick.AddListener(StartGameLoop);
             endGameScreen.ToMenuButton.onClick.AddListener(ToMenuButtonClick);
+
+            _gameFieldCreator.CreateGameField();
         }
 
         ///  <inheritdoc />
@@ -62,6 +68,7 @@ namespace CoreGameLoop.Implementations.Systems
         {
             var gameScreen = _screenSystem.ShowScreen<IGameScreen>();
 
+            _gameFieldCreator.SetStartGameFieldCellsData();
         }
 
         /// <summary>

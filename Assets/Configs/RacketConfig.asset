@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a10512e9d0646194592a4f113b0aaff7, type: 3}
+  m_Name: RacketConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Racket.Configs.RacketConfig
+  _racketViewPrefab: {fileID: 5628835838180188016, guid: 8e2b6a6d8c03c954f94d05b006b19cfc, type: 3}
+  _racketSize: {x: 2.5, y: 0.4}
+  _racketPosition: {x: 0, y: -8}

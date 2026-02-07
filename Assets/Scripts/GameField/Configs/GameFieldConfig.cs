@@ -13,7 +13,7 @@ namespace GameField.Configs
         [SerializeField] private GameFieldCellView _gameFieldCellViewPrefab;
         [SerializeField] private GameFieldGridView _gameFieldGridViewPrefab;
         [SerializeField] private Vector2Int _gameFieldSize;
-        [SerializeField] private Vector3 _gameFieldCellSize;
+        [SerializeField] private Vector2 _gameFieldCellSize;
         [SerializeField] private float _gameFieldCellPadding = 0.02f;
         [SerializeField] private Vector2 _gameFieldGridPosition;
 
@@ -35,7 +35,7 @@ namespace GameField.Configs
         /// <summary>
         /// Размер ячейки игрового поля
         /// </summary>
-        public Vector3 GameFieldCellSize => _gameFieldCellSize;
+        public Vector2 GameFieldCellSize => _gameFieldCellSize;
 
         /// <summary>
         /// Отступ ячейки игрового поля

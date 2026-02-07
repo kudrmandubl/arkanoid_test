@@ -31,6 +31,6 @@ namespace GameField.Interfaces
         /// </summary>
         /// <param name="gameFieldCellView"></param>
         /// <param name="value"></param>
-        void SetCellActive(IGameFieldCellView gameFieldCellView, bool value, bool needSave);
+        void SetCellActive(IGameFieldCellView gameFieldCellView, bool value);
     }
 }

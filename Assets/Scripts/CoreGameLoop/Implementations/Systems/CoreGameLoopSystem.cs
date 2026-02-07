@@ -3,6 +3,7 @@ using Common.Interfaces;
 using CoreGameLoop.Configs;
 using CoreGameLoop.Interfaces;
 using GameField.Interfaces;
+using Racket.Interfaces;
 using Screens.Interfaces;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace CoreGameLoop.Implementations.Systems
         private IScreenSystem _screenSystem;
         private IGameContainer _gameContainer;
         private IGameFieldCreator _gameFieldCreator;
+        private IRacketSystem _racketSystem;
 
         private CoreGameLoopConfig _coreGameLoopConfig;
 
@@ -28,11 +30,13 @@ namespace CoreGameLoop.Implementations.Systems
         public CoreGameLoopSystem(IScreenSystem screenSystem,
             IGameContainer gameContainer,
             IGameFieldCreator gameFieldCreator,
+            IRacketSystem racketSystem,
             CoreGameLoopConfig coreGameLoopConfig)
         {
             _screenSystem = screenSystem;
             _gameContainer = gameContainer;
             _gameFieldCreator = gameFieldCreator;
+            _racketSystem = racketSystem;
 
             _coreGameLoopConfig = coreGameLoopConfig;
         }
@@ -60,7 +64,6 @@ namespace CoreGameLoop.Implementations.Systems
             endGameScreen.ContinueButton.onClick.AddListener(StartGameLoop);
             endGameScreen.ToMenuButton.onClick.AddListener(ToMenuButtonClick);
 
-            _gameFieldCreator.CreateGameField();
         }
 
         ///  <inheritdoc />
@@ -68,7 +71,10 @@ namespace CoreGameLoop.Implementations.Systems
         {
             var gameScreen = _screenSystem.ShowScreen<IGameScreen>();
 
-            _gameFieldCreator.SetStartGameFieldCellsData();
+            _gameFieldCreator.CreateGameField();
+            _racketSystem.CreateRacket();
+
+            _racketSystem.SetControlActive(true);
         }
 
         /// <summary>
@@ -94,6 +100,7 @@ namespace CoreGameLoop.Implementations.Systems
         private void EndGame(bool win)
         {
             var gameScreen = _screenSystem.ShowScreen<IEndGameScreen>();
+            _racketSystem.SetControlActive(false);
         }
 
         /// <summary>
@@ -102,6 +109,7 @@ namespace CoreGameLoop.Implementations.Systems
         private void PauseButtonClick()
         {
             _screenSystem.ShowScreen<IPauseScreen>(false);
+            _racketSystem.SetControlActive(false);
         }
 
         /// <summary>
@@ -110,6 +118,7 @@ namespace CoreGameLoop.Implementations.Systems
         private void ContinueAfterPauseButtonClick()
         {
             _screenSystem.HideScreen<IPauseScreen>();
+            _racketSystem.SetControlActive(true);
         }
 
         /// <summary>

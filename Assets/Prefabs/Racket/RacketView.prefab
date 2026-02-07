@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1742979375985321242
+--- !u!1 &2867066020775843567
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3753007433774719524}
-  - component: {fileID: 7770097846724891015}
+  - component: {fileID: 2338412266576720560}
+  - component: {fileID: 5652738922360831894}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -17,28 +17,28 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3753007433774719524
+--- !u!4 &2338412266576720560
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742979375985321242}
+  m_GameObject: {fileID: 2867066020775843567}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1126194298927411998}
+  m_Father: {fileID: 7480239256463220176}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &7770097846724891015
+--- !u!212 &5652738922360831894
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1742979375985321242}
+  m_GameObject: {fileID: 2867066020775843567}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0.60188675, b: 0.60188675, a: 1}
+  m_Color: {r: 0.5018867, g: 0.5018867, b: 0.5018867, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -90,7 +90,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &4215432132316616666
+--- !u!1 &5055741760696203075
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,42 +98,42 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1126194298927411998}
-  - component: {fileID: 4922870227203215924}
+  - component: {fileID: 7480239256463220176}
+  - component: {fileID: 5628835838180188016}
   m_Layer: 0
-  m_Name: GameFieldCellView
+  m_Name: RacketView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1126194298927411998
+--- !u!4 &7480239256463220176
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4215432132316616666}
+  m_GameObject: {fileID: 5055741760696203075}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3753007433774719524}
+  - {fileID: 2338412266576720560}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4922870227203215924
+--- !u!114 &5628835838180188016
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4215432132316616666}
+  m_GameObject: {fileID: 5055741760696203075}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67f9d4939487bc54aa08c4851af84a71, type: 3}
+  m_Script: {fileID: 11500000, guid: 2a5051b838aa2a8468167ef4f5875529, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameField.Implementations.Views.GameFieldCellView
-  _mainSpriteRenderer: {fileID: 7770097846724891015}
-  _sizableTransform: {fileID: 3753007433774719524}
+  m_EditorClassIdentifier: Assembly-CSharp::Racket.Implementations.Views.RacketView
+  _mainSpriteRenderer: {fileID: 5652738922360831894}
+  _sizableTransform: {fileID: 2338412266576720560}

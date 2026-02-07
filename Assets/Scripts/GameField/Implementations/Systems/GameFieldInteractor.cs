@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using DataStorage.Data;
+using DataStorage.Implementations.Systems;
 using DataStorage.Interfaces;
 using GameField.Data;
 using GameField.Interfaces;
@@ -10,8 +10,6 @@ namespace GameField.Implementations.Systems
     ///  <inheritdoc />
     public class GameFieldInteractor : IGameFieldInteractor
     {
-        private IDataStorageSystem _dataStorageSystem;
-
         private IGameFieldGridView _gameFieldGridView;
 
         ///  <inheritdoc />
@@ -20,9 +18,8 @@ namespace GameField.Implementations.Systems
         /// <summary>
         /// Конструктор
         /// </summary>
-        public GameFieldInteractor(IDataStorageSystem dataStorageSystem)
+        public GameFieldInteractor()
         {
-            _dataStorageSystem = dataStorageSystem;
         }
 
         ///  <inheritdoc />
@@ -44,26 +41,12 @@ namespace GameField.Implementations.Systems
             return _gameFieldGridView.CellViews[targetCellId];
         }
 
+
         ///  <inheritdoc />
-        public void SetCellActive(IGameFieldCellView gameFieldCellView, bool value, bool needSave)
+        public void SetCellActive(IGameFieldCellView gameFieldCellView, bool value)
         {
             gameFieldCellView.CellData.IsActive = value;
-
-            if (!needSave)
-            {
-                return;
-            }
-
-            var gameFieldStorageData = _dataStorageSystem.GetStorageData<GameFieldStorageData>();
-            var cellStorageData = gameFieldStorageData.GameFieldCellsData.FirstOrDefault(x => x.GridPosition == gameFieldCellView.CellData.GridPosition);
-            if (cellStorageData == null)
-            {
-                cellStorageData = new GameFieldCellData();
-                gameFieldStorageData.GameFieldCellsData.Add(cellStorageData);
-            }
-
-            cellStorageData.IsActive = value;
-            _dataStorageSystem.Save<GameFieldStorageData>();
+            gameFieldCellView.Transform.gameObject.SetActive(value);
         }
     }
 }

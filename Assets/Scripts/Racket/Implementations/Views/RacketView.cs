@@ -1,12 +1,12 @@
 ﻿using Common.Utils;
-using GameField.Data;
-using GameField.Interfaces;
+using Racket.Data;
+using Racket.Interfaces;
 using UnityEngine;
 
-namespace GameField.Implementations.Views
+namespace Racket.Implementations.Views
 {
-    ///  <inheritdoc cref="IGameFieldCellView" />
-    public class GameFieldCellView : CachedMonoBehaviour, IGameFieldCellView
+    ///  <inheritdoc cref="IRacketView" />
+    public class RacketView : CachedMonoBehaviour, IRacketView
     {
         [SerializeField] private SpriteRenderer _mainSpriteRenderer;
         [SerializeField] private Transform _sizableTransform;
@@ -18,6 +18,7 @@ namespace GameField.Implementations.Views
         public Transform SizableTransform => _sizableTransform;
 
         ///  <inheritdoc />
-        public GameFieldCellData CellData { get; set; }
+        public RacketData RacketData { get; set; }
+
     }
 }

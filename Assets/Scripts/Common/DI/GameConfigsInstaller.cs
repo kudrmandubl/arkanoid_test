@@ -2,6 +2,7 @@
 using CoreGameLoop.Configs;
 using GameField.Configs;
 using MainMenu.Configs;
+using Racket.Configs;
 using Screens.Configs;
 using UnityEngine;
 using Zenject;
@@ -19,6 +20,7 @@ namespace Common.DI
         [SerializeField] private CoreGameLoopConfig _coreGameLoopConfig;
         [SerializeField] private MainMenuConfig _mainMenuConfig;
         [SerializeField] private GameFieldConfig _gameFieldConfig;
+        [SerializeField] private RacketConfig _racketConfig;
 
         /// <summary>
         /// Установить зависимости
@@ -30,6 +32,7 @@ namespace Common.DI
             Container.BindInstance<CoreGameLoopConfig>(_coreGameLoopConfig);
             Container.BindInstance<MainMenuConfig>(_mainMenuConfig);
             Container.BindInstance<GameFieldConfig>(_gameFieldConfig);
+            Container.BindInstance<RacketConfig>(_racketConfig);
         }
     }
 }

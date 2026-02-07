@@ -14,17 +14,11 @@ namespace DataStorage.Data
         public int _highScore;
 
         /// <summary>
-        /// Текущий счёт
-        /// </summary>
-        public int _currentScore;
-
-        /// <summary>
         /// Конструктор
         /// </summary>
         public PlayerStorageData()
         {
             _highScore = 0;
-            _currentScore = 0;
         }
 
         /// <summary>
@@ -33,7 +27,6 @@ namespace DataStorage.Data
         public void Clear()
         {
             _highScore = 0;
-            _currentScore = 0;
         }
     }
 }

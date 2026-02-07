@@ -1,13 +1,13 @@
 ﻿using Common.Interfaces;
-using GameField.Data;
+using Racket.Data;
 using UnityEngine;
 
-namespace GameField.Interfaces
+namespace Racket.Interfaces
 {
     /// <summary>
     /// Отображение ячейки игрового поля
     /// </summary>
-    public interface IGameFieldCellView : IBaseView
+    public interface IRacketView : IBaseView
     {
         /// <summary>
         /// Основной Спрайт рендерер 
@@ -20,8 +20,8 @@ namespace GameField.Interfaces
         Transform SizableTransform { get; }
 
         /// <summary>
-        /// Данные ячейки
+        /// Данные ракетки
         /// </summary>
-        GameFieldCellData CellData { get; set; }
+        RacketData RacketData { get; set; }
     }
 }

@@ -17,3 +17,4 @@ MonoBehaviour:
   _coreGameLoopConfig: {fileID: 11400000, guid: 5a4db74fff6568e49aa753f9c636f916, type: 2}
   _mainMenuConfig: {fileID: 11400000, guid: e37edfe9a2d8459458d72d9bb9174e73, type: 2}
   _gameFieldConfig: {fileID: 11400000, guid: 21a1a2044eab5ad4f9ac4eb5663b354f, type: 2}
+  _racketConfig: {fileID: 11400000, guid: 6876347a1fe545e4a88e526f1e4bc84a, type: 2}

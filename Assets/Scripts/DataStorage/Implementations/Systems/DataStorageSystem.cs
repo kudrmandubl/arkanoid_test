@@ -49,7 +49,6 @@ namespace DataStorage.Implementations.Systems
             _storagesData = new BaseStorageData[]
             {
                 await LoadAsync<PlayerStorageData>(),
-                await LoadAsync<GameFieldStorageData>(),
             }; 
         }
 
@@ -110,11 +109,9 @@ namespace DataStorage.Implementations.Systems
             _storagesData = new BaseStorageData[]
             {
                 new PlayerStorageData(),
-                new GameFieldStorageData(),
             };
 
             Save<PlayerStorageData>();
-            Save<GameFieldStorageData>();
         }
 
         /// <summary>

@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace CoreGameLoop.Interfaces
 {
     /// <summary>
@@ -6,6 +8,11 @@ namespace CoreGameLoop.Interfaces
     /// </summary>
     public interface ICoreGameLoopSystem
     {
+        /// <summary>
+        /// При возвращении в меню
+        /// </summary>
+        Action OnBackToMenu { get; set; }
+
         /// <summary>
         /// Инициализировать
         /// </summary>
@@ -15,10 +22,5 @@ namespace CoreGameLoop.Interfaces
         /// Начать игровой цикл
         /// </summary>
         void StartGameLoop();
-
-        /// <summary>
-        /// Остановить игрового цикла
-        /// </summary>
-        void StopGameLoop();
     }
 }

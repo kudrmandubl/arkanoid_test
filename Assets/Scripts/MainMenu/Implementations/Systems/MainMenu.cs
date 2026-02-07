@@ -45,9 +45,11 @@ namespace MainMenu.Implementations.Systems
         {
             var mainMenuScreen = _screenSystem.GetScreen<IMainMenuScreen>();
             mainMenuScreen.PlayButton.onClick.AddListener(PlayButtonClick);
-            _screenSystem.GetScreen<IGameScreen>().TopPanel.BackButton.onClick.AddListener(BackFromCoreButtonClick);
 
             _mainMenuParallax.Initialize();
+            _coreGameLoopSystem.Initialize();
+
+            _coreGameLoopSystem.OnBackToMenu += BackFromCore;
         }
 
         ///  <inheritdoc />
@@ -72,11 +74,10 @@ namespace MainMenu.Implementations.Systems
         }
 
         /// <summary>
-        /// Нажатие кнопки выхода из кора
+        /// Возвращение из кора
         /// </summary>
-        private void BackFromCoreButtonClick()
+        private void BackFromCore()
         {
-            _coreGameLoopSystem.StopGameLoop();
             ShowMainMenu();
         }
 

@@ -101,8 +101,11 @@ namespace Balls.Implementations.Systems
         {
             var collisionPosition = racketView.Collider2D.bounds.ClosestPoint(ballView.Transform.position);
             var direction = ballView.Transform.position - collisionPosition;
+            var isBallInRacket = ballView.Transform.position.Equals(collisionPosition);
 
-            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y) 
+                && !isBallInRacket)
             {
                 ballView.BallData.Direction.x = -ballView.BallData.Direction.x;
             }
@@ -112,6 +115,13 @@ namespace Balls.Implementations.Systems
                 ballView.BallData.Direction.x = racketDirection.x * 2 / racketView.RacketData.Width;
                 ballView.BallData.Direction.y = -ballView.BallData.Direction.y;
                 ballView.BallData.Direction = ballView.BallData.Direction.normalized;
+
+                if (isBallInRacket)
+                {
+                    var ballPosition = ballView.Transform.position;
+                    ballPosition.y += ballView.BallData.Size.y + racketView.RacketData.Height;
+                    ballView.Transform.position = ballPosition;
+                }
             }
         }
     }

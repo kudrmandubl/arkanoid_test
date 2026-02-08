@@ -2,6 +2,7 @@
 using Inputs.Interfaces;
 using Racket.Configs;
 using Racket.Data;
+using Racket.Implementations.Views;
 using Racket.Interfaces;
 using UnityEngine;
 
@@ -48,6 +49,7 @@ namespace Racket.Implementations.Systems
                 _racketView = GameObject.Instantiate(_racketConfig.RacketViewPrefab, _gameContainer.CoreContainer);
                 _racketView.SizableTransform.localScale = Vector2.one * _racketConfig.RacketSize;
                 _racketView.RacketData = new RacketData();
+                _racketView.RacketData.Height = _racketConfig.RacketSize.y;
                 _racketInteractor.SetRacket(_racketView);
             }
 

@@ -12,5 +12,10 @@ namespace Racket.Data
         /// Ширина
         /// </summary>
         public float Width;
+
+        /// <summary>
+        /// Высота
+        /// </summary>
+        public float Height;
     }
 }

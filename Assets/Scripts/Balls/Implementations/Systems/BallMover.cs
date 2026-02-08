@@ -14,6 +14,10 @@ namespace Balls.Implementations.Systems
         private IBallCreator _ballCreator;
 
         private bool _isActive;
+        private float _screenLeft;
+        private float _screenRight;
+        private float _screenBottom;
+        private float _screenTop;
 
         /// <summary>
         /// Конструктор
@@ -35,6 +39,10 @@ namespace Balls.Implementations.Systems
         public void SetActive(bool value)
         {
             _isActive = value;
+            if (value)
+            {
+                RefreshScreenBorders();
+            }
         }
 
         /// <summary>
@@ -69,39 +77,67 @@ namespace Balls.Implementations.Systems
         /// <returns></returns>
         private Vector3 CheckAndApplyBorders(Vector3 position, BallData ballData, out bool isBallLost)
         {
-            //Получить границы экрана в мировых координатах
-            var bottomLeftPosition = _mainCamera.Camera.ScreenToWorldPoint(new Vector3(0, 0, _mainCamera.Camera.transform.position.z));
-            var topRightPosition = _mainCamera.Camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _mainCamera.Camera.transform.position.z));
-            float screenLeft = bottomLeftPosition.x;
-            float screenRight = topRightPosition.x;
-            float screenBottom = bottomLeftPosition.y;
-            float screenTop = topRightPosition.y;
-
             // Учитывать ширину ракетки (scale.x) и размер
             float ballHalfWidth = ballData.Size.x / 2f;
             float ballHalfHeight = ballData.Size.y / 2f;
 
             isBallLost = false;
 
-            if (position.x <= screenLeft + ballHalfWidth
-                || position.x >= screenRight - ballHalfWidth)
+            if (position.x <= _screenLeft + ballHalfWidth
+                || position.x >= _screenRight - ballHalfWidth)
             {
                 ballData.Direction.x = -ballData.Direction.x;
+                position.x = ClampPositionX(position.x, ballHalfWidth);
             }
-            else if (position.y >= screenTop - ballHalfHeight)
+            else if (position.y >= _screenTop - ballHalfHeight)
             {
                 ballData.Direction.y = -ballData.Direction.y;
+                position.y = ClampPositionY(position.y, ballHalfHeight); 
             }
-            else if (position.y <= screenBottom + ballHalfHeight)
+            else if (position.y <= _screenBottom + ballHalfHeight)
             {
                 isBallLost = true;
             }
 
             // Ограничить позицию так, чтобы ракетка не выходила за границы
-            position.x = Mathf.Clamp(position.x, screenLeft + ballHalfWidth, screenRight - ballHalfWidth);
-            position.y = Mathf.Clamp(position.y, screenBottom + ballHalfHeight, screenTop - ballHalfHeight);
 
             return position;
+        }
+
+        /// <summary>
+        /// Обновить границы экрана
+        /// </summary>
+        private void RefreshScreenBorders()
+        {
+            //Получить границы экрана в мировых координатах
+            var bottomLeftPosition = _mainCamera.Camera.ScreenToWorldPoint(new Vector3(0, 0, _mainCamera.Camera.transform.position.z));
+            var topRightPosition = _mainCamera.Camera.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, _mainCamera.Camera.transform.position.z));
+            _screenLeft = bottomLeftPosition.x;
+            _screenRight = topRightPosition.x;
+            _screenBottom = bottomLeftPosition.y;
+            _screenTop = topRightPosition.y;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="positionX"></param>
+        /// <param name="ballHalfWidth"></param>
+        /// <returns></returns>
+        private float ClampPositionX(float positionX, float ballHalfWidth)
+        {
+            return Mathf.Clamp(positionX, _screenLeft + ballHalfWidth, _screenRight - ballHalfWidth);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="positionY"></param>
+        /// <param name="ballHalfHeight"></param>
+        /// <returns></returns>
+        private float ClampPositionY(float positionY, float ballHalfHeight)
+        {
+             return Mathf.Clamp(positionY, _screenBottom + ballHalfHeight, _screenTop - ballHalfHeight);
         }
     }
 }

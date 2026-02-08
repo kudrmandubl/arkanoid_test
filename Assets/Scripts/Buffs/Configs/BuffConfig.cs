@@ -21,7 +21,7 @@ namespace Buffs.Configs
         /// <summary>
         /// Инт значение
         /// </summary>
-        public float IntValue => _intValue;
+        public int IntValue => _intValue;
 
         /// <summary>
         /// Флоат значение

@@ -1,5 +1,8 @@
-﻿using Buffs.Data;
+﻿using System;
+using Buffs.Data;
+using Buffs.Implementations.Views;
 using Common.Interfaces;
+using Racket.Interfaces;
 using UnityEngine;
 
 namespace Buffs.Interfaces
@@ -10,6 +13,11 @@ namespace Buffs.Interfaces
     public interface IBuffView : IBaseView
     {
         /// <summary>
+        /// При вхождении в триггер ракетки
+        /// </summary>
+        Action<IBuffView, IRacketView> OnRacketTriggerEnter { get; set; }
+
+        /// <summary>
         /// Физическое тело
         /// </summary>
         Rigidbody2D Rigidbody2D { get; }
@@ -18,6 +26,11 @@ namespace Buffs.Interfaces
         /// Основной Спрайт рендерер 
         /// </summary>
         SpriteRenderer MainSpriteRenderer { get; }
+
+        /// <summary>
+        /// Вариант отображения бафа
+        /// </summary>
+        BuffViewVariant[] BuffViewVariants { get; }
 
         /// <summary>
         /// Данные бафа

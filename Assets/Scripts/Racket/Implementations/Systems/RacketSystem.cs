@@ -19,6 +19,7 @@ namespace Racket.Implementations.Systems
 
         private IRacketView _racketView;
         private bool _isActive;
+        private Vector2 _lastPointerPosition;
         
         /// <summary>
         /// Конструктор
@@ -60,6 +61,13 @@ namespace Racket.Implementations.Systems
             _isActive = value;
         }
 
+        ///  <inheritdoc />
+        public void AddRacketWidth(float width)
+        {
+            SetRacketWidth(_racketView, _racketView.RacketData.Width + width);
+            Dragging(_lastPointerPosition);
+        }
+
         /// <summary>
         /// Установить ширину ракетки
         /// </summary>
@@ -83,6 +91,7 @@ namespace Racket.Implementations.Systems
             {
                 return;
             }
+            _lastPointerPosition = pointerPosition;
 
             var pointerWorldPosition = _mainCamera.Camera.ScreenToWorldPoint(pointerPosition);
 

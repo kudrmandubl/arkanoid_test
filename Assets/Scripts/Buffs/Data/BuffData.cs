@@ -17,7 +17,7 @@ namespace Buffs.Data
         /// <summary>
         /// Инт значение
         /// </summary>
-        public float IntValue;
+        public int IntValue;
 
         /// <summary>
         /// Флоат значение

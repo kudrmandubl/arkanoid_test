@@ -18,5 +18,5 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b4fe2850dbf57bf4a8a53968f165d2cb, type: 2}
   - {fileID: 11400000, guid: c126a70db58b5d7439738c15438598a0, type: 2}
   - {fileID: 11400000, guid: 2294b9b01896552429cbdeefaf3cb59f, type: 2}
-  _buffChance: 0.5
-  _buffSpeed: 1
+  _buffChance: 0.1
+  _buffSpeed: 5

@@ -33,6 +33,7 @@ namespace CoreGameLoop.Implementations.Systems
         private bool _isInitialized;
         private int _currentScore;
         private IGameScreen _gameScreen;
+        private bool _gameEnded;
 
         ///  <inheritdoc />
         public Action OnBackToMenu { get; set; }
@@ -112,6 +113,7 @@ namespace CoreGameLoop.Implementations.Systems
             _racketSystem.SetControlActive(true);
             _ballMover.SetActive(true);
             _buffSystem.SetActive(true);
+            _gameEnded = false;
         }
 
         /// <summary>
@@ -127,6 +129,11 @@ namespace CoreGameLoop.Implementations.Systems
         /// </summary>
         private void Lose()
         {
+            if (_gameEnded)
+            {
+                return;
+            }
+
             EndGame(false);
             ClearScore();
         }
@@ -139,7 +146,8 @@ namespace CoreGameLoop.Implementations.Systems
         {
             var endGameScreen = _screenSystem.ShowScreen<IEndGameScreen>();
             endGameScreen.ResultText.text = win ? _coreGameLoopConfig.WinLabel : _coreGameLoopConfig.LoseLabel;
-            
+
+            _gameEnded = true;
             _racketSystem.SetControlActive(false);
             _ballMover.SetActive(false);
             _buffSystem.SetActive(false);

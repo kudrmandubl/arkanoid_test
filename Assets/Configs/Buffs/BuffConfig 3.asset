@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2946146f45149f4eafce700ef9cfdea, type: 3}
   m_Name: BuffConfig 3
   m_EditorClassIdentifier: Assembly-CSharp::Buffs.Configs.BuffConfig
-  _buffType: 2
+  _buffType: 3
   _intValue: 0
   _floatValue: -2

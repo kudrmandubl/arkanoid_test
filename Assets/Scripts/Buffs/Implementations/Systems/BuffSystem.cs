@@ -1,10 +1,13 @@
 ﻿using System.Collections.Generic;
+using Balls.Implementations.Views;
 using Balls.Interfaces;
 using Buffs.Configs;
 using Buffs.Data;
+using Buffs.Enums;
 using Buffs.Interfaces;
 using Common.Interfaces;
 using GameField.Interfaces;
+using Racket.Interfaces;
 using UnityEngine;
 
 namespace Buffs.Implementations.Systems
@@ -18,6 +21,8 @@ namespace Buffs.Implementations.Systems
         private IBallCollisionProcessor _ballCollisionProcessor;
         private IMonoBehaviourCycle _monoBehaviourCycle;
         private IMainCamera _mainCamera;
+        private IRacketSystem _racketSystem;
+        private IBallCreator _ballCreator;
 
         private BuffsConfig _buffsConfig;
 
@@ -33,6 +38,8 @@ namespace Buffs.Implementations.Systems
             IBallCollisionProcessor ballCollisionProcessor,
             IMonoBehaviourCycle monoBehaviourCycle,
             IMainCamera mainCamera,
+            IRacketSystem racketSystem,
+            IBallCreator ballCreator,
             BuffsConfig buffsConfig)
         {
             _buffViewPool = buffViewPool;
@@ -41,6 +48,8 @@ namespace Buffs.Implementations.Systems
             _ballCollisionProcessor = ballCollisionProcessor;
             _monoBehaviourCycle = monoBehaviourCycle;
             _mainCamera = mainCamera;
+            _racketSystem = racketSystem;
+            _ballCreator = ballCreator;
 
             _buffsConfig = buffsConfig;
 
@@ -94,7 +103,14 @@ namespace Buffs.Implementations.Systems
             buffView.BuffData.IntValue = randomBuffConfig.IntValue;
             buffView.BuffData.FloatValue = randomBuffConfig.FloatValue;
 
+            for (int i = 0; i < buffView.BuffViewVariants.Length; i++)
+            {
+                var buffViewVariant = buffView.BuffViewVariants[i];
+                buffViewVariant.gameObject.SetActive(buffViewVariant.BuffType == buffView.BuffData.BuffType);
+            }
+
             _buffViews.Add(buffView);
+            buffView.OnRacketTriggerEnter += ProcessBuffCollideRacket;
         }
 
         /// <summary>
@@ -106,6 +122,7 @@ namespace Buffs.Implementations.Systems
             _buffDataPool.Free(buffView.BuffData);
             _buffViewPool.Free(buffView);
             _buffViews.Remove(buffView);
+            buffView.OnRacketTriggerEnter -= ProcessBuffCollideRacket;
         }
 
         /// <summary>
@@ -149,6 +166,34 @@ namespace Buffs.Implementations.Systems
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Обработать столкновение бафа с ракеткой
+        /// </summary>
+        /// <param name="buffView"></param>
+        /// <param name="racketView"></param>
+        private void ProcessBuffCollideRacket(IBuffView buffView, IRacketView racketView)
+        {
+            ApplyBuff(buffView.BuffData);
+            DestroyBuff(buffView);
+        }
+
+        /// <summary>
+        /// Применить баф
+        /// </summary>
+        /// <param name="buffData"></param>
+        private void ApplyBuff(BuffData buffData)
+        {
+            if (buffData.BuffType == BuffType.RacketSizeIncrease
+                || buffData.BuffType == BuffType.RacketSizerDecrease)
+            {
+                _racketSystem.AddRacketWidth(buffData.FloatValue);
+            }
+            else if(buffData.BuffType == BuffType.BallsMultiply)
+            {
+                _ballCreator.CreateExtraBalls(buffData.IntValue);
+            }
         }
     }
 }

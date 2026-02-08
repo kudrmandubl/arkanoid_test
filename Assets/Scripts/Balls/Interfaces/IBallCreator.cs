@@ -24,6 +24,11 @@ namespace Balls.Interfaces
         void CreateBall();
 
         /// <summary>
+        /// Создать дополнительный шарик
+        /// </summary>
+        void CreateExtraBalls(int count);
+
+        /// <summary>
         /// Уничтожить шарик
         /// </summary>
         /// <param name="ballView"></param>

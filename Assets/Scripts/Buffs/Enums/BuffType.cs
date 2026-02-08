@@ -3,7 +3,8 @@
     public enum BuffType
     {
         None,
-        BallsMultiplier,
-        RacketSizer,
+        BallsMultiply,
+        RacketSizeIncrease,
+        RacketSizerDecrease,
     }
 }

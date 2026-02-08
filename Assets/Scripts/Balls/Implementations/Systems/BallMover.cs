@@ -1,5 +1,4 @@
-﻿using Balls.Configs;
-using Balls.Data;
+﻿using Balls.Data;
 using Balls.Interfaces;
 using Common.Interfaces;
 using UnityEngine;
@@ -22,15 +21,14 @@ namespace Balls.Implementations.Systems
         public BallMover(IMainCamera mainCamera,
             IBallInteractor ballInteractor,
             IMonoBehaviourCycle monoBehaviourCycle,
-            IBallCreator ballCreator,
-            BallsConfig ballsConfig)
+            IBallCreator ballCreator)
         {
             _mainCamera = mainCamera;
             _ballInteractor = ballInteractor;
             _monoBehaviourCycle = monoBehaviourCycle;
             _ballCreator = ballCreator;
 
-            _monoBehaviourCycle.OnUpdate += MoveBalls;
+            _monoBehaviourCycle.OnFixedUpdate += MoveBalls;
         }
 
         ///  <inheritdoc />
@@ -55,6 +53,7 @@ namespace Balls.Implementations.Systems
                 var position = ballView.Transform.position + ballView.BallData.Direction * ballView.BallData.Speed * deltaTime;
                 position = CheckAndApplyBorders(position, ballView.BallData, out var isBallLost);
                 ballView.Transform.position = position;
+                ballView.BallData.IsCanCollide = false;
 
                 if (isBallLost)
                 {

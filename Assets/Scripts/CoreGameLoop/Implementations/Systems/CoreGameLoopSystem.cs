@@ -20,6 +20,7 @@ namespace CoreGameLoop.Implementations.Systems
         private IBallCreator _ballCreator;
         private IBallMover _ballMover;
         private IBallInteractor _ballInteractor;
+        private IBallCollisionProcessor _ballCollisionProcessor;
 
         private CoreGameLoopConfig _coreGameLoopConfig;
 
@@ -38,6 +39,7 @@ namespace CoreGameLoop.Implementations.Systems
             IBallCreator ballCreator,
             IBallMover ballMover,
             IBallInteractor ballInteractor,
+            IBallCollisionProcessor ballCollisionProcessor,
             CoreGameLoopConfig coreGameLoopConfig)
         {
             _screenSystem = screenSystem;
@@ -47,6 +49,7 @@ namespace CoreGameLoop.Implementations.Systems
             _ballCreator = ballCreator;
             _ballMover = ballMover;
             _ballInteractor = ballInteractor;
+            _ballCollisionProcessor = ballCollisionProcessor;
 
             _coreGameLoopConfig = coreGameLoopConfig;
         }
@@ -144,13 +147,14 @@ namespace CoreGameLoop.Implementations.Systems
         /// </summary>
         private void ToMenuButtonClick()
         {
+            _ballCreator.DestroyAllBalls();
             OnBackToMenu?.Invoke();
         }
 
         /// <summary>
         /// Проверить проигрыш
         /// </summary>
-        private void CheckLose()
+        private void CheckLose(IBallView ballView)
         {
             if(_ballInteractor.BallViews.Count > 0)
             {

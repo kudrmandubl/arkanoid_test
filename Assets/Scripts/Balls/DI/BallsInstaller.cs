@@ -24,6 +24,7 @@ namespace Balls.DI
             Container.Bind<IBallInteractor>().To<BallInteractor>().AsCached();
             Container.Bind<IBallCreator>().To<BallCreator>().AsCached();
             Container.Bind<IBallMover>().To<BallMover>().AsCached();
+            Container.Bind<IBallCollisionProcessor>().To<BallCollisionProcessor>().AsCached();
         }
     }
 }

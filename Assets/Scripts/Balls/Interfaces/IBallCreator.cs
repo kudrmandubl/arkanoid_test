@@ -9,9 +9,14 @@ namespace Balls.Interfaces
     public interface IBallCreator
     {
         /// <summary>
+        /// При создании шарика
+        /// </summary>
+        Action<IBallView> OnCreateBall { get; set; }
+
+        /// <summary>
         /// При уничтожении шарика
         /// </summary>
-        Action OnDestroyBall { get; set; }
+        Action<IBallView> OnDestroyBall { get; set; }
 
         /// <summary>
         /// Создать шар
@@ -23,5 +28,10 @@ namespace Balls.Interfaces
         /// </summary>
         /// <param name="ballView"></param>
         void DestroyBall(IBallView ballView);
+
+        /// <summary>
+        /// Уничтожить все шарики
+        /// </summary>
+        void DestroyAllBalls();
     }
 }

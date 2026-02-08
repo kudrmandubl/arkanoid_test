@@ -20,7 +20,10 @@ namespace Balls.Implementations.Systems
         private BallsConfig _ballsConfig;
 
         ///  <inheritdoc />
-        public Action OnDestroyBall { get; set; }
+        public Action<IBallView> OnCreateBall { get; set; }
+
+        ///  <inheritdoc />
+        public Action<IBallView> OnDestroyBall { get; set; }
 
         /// <summary>
         /// Конструктор
@@ -59,6 +62,7 @@ namespace Balls.Implementations.Systems
             ballView.BallData.Speed = _ballsConfig.BallSpeed;
 
             _ballInteractor.AddBall(ballView);
+            OnCreateBall?.Invoke(ballView);
         }
 
         ///  <inheritdoc />
@@ -67,7 +71,17 @@ namespace Balls.Implementations.Systems
             _ballDataPool.Free(ballView.BallData);
             _ballViewPool.Free(ballView);
             _ballInteractor.RemoveBall(ballView);
-            OnDestroyBall?.Invoke();
+            OnDestroyBall?.Invoke(ballView);
+        }
+
+        ///  <inheritdoc />
+        public void DestroyAllBalls()
+        {
+            for (int i = _ballInteractor.BallViews.Count - 1; i >= 0; i--)
+            {
+                var ballView = _ballInteractor.BallViews[i];
+                DestroyBall(ballView);
+            }
         }
     }
 }

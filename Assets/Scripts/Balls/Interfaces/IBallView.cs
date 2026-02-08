@@ -1,5 +1,8 @@
-﻿using Balls.Data;
+﻿using System;
+using Balls.Data;
 using Common.Interfaces;
+using GameField.Interfaces;
+using Racket.Interfaces;
 using UnityEngine;
 
 namespace Balls.Interfaces
@@ -9,6 +12,16 @@ namespace Balls.Interfaces
     /// </summary>
     public interface IBallView : IBaseView
     {
+        /// <summary>
+        /// При вхождении в триггер ячейки игрового поля
+        /// </summary>
+        Action<IBallView, IGameFieldCellView, Collider2D> OnGameFieldCellTriggerEnter { get; set; }
+
+        /// <summary>
+        /// При вхождении в триггер ракетки
+        /// </summary>
+        Action<IBallView, IRacketView, Collider2D> OnRacketTriggerEnter { get; set; }
+
         /// <summary>
         /// Основной Спрайт рендерер 
         /// </summary>

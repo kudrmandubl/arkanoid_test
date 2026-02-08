@@ -1,4 +1,5 @@
 ﻿
+using System;
 using UnityEngine;
 
 namespace GameField.Interfaces
@@ -22,6 +23,11 @@ namespace GameField.Interfaces
         /// Общее количество ячеек
         /// </summary>
         int TotalCellCount { get; }
+
+        /// <summary>
+        /// При уничтожении всех ячеек
+        /// </summary>
+        Action OnAllGameFieldCellDestoyed { get; set; }
 
         /// <summary>
         /// Рестарт

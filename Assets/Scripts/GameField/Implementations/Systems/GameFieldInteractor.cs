@@ -1,4 +1,4 @@
-﻿using GameField.Implementations.Views;
+﻿using System;
 using GameField.Interfaces;
 using UnityEngine;
 
@@ -21,6 +21,9 @@ namespace GameField.Implementations.Systems
         ///  <inheritdoc />
         public int TotalCellCount => _totalCellCount;
 
+        ///  <inheritdoc />
+        public Action OnAllGameFieldCellDestoyed { get; set; }
+
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -32,6 +35,7 @@ namespace GameField.Implementations.Systems
         public void Restart()
         {
             _totalCellCount = _gameFieldGridView.CellViews.Count;
+            _activeCellCount = _totalCellCount;
         }
 
         ///  <inheritdoc />
@@ -62,6 +66,10 @@ namespace GameField.Implementations.Systems
             if (!value)
             {
                 _activeCellCount--;
+                if(_activeCellCount <= 0)
+                {
+                    OnAllGameFieldCellDestoyed?.Invoke();
+                }
             }
         }
     }

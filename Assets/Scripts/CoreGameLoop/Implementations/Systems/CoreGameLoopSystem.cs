@@ -82,6 +82,7 @@ namespace CoreGameLoop.Implementations.Systems
             endGameScreen.ToMenuButton.onClick.AddListener(ToMenuButtonClick);
 
             _ballCreator.OnDestroyBall += CheckLose;
+            _gameFieldInteractor.OnAllGameFieldCellDestoyed += Win;
         }
 
         ///  <inheritdoc />

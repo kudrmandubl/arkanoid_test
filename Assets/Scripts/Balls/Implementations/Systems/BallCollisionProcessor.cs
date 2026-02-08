@@ -68,8 +68,7 @@ namespace Balls.Implementations.Systems
 
             if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             {
-                if (!ballView.BallData.IsCanCollideX 
-                    || ballView.BallData.LastHittedCellGridPosition.y == gameFieldCellView.CellData.GridPosition.y)
+                if (!ballView.BallData.IsCanCollideX )
                 {
                     return;
                 }
@@ -79,8 +78,7 @@ namespace Balls.Implementations.Systems
             }
             else
             {
-                if (!ballView.BallData.IsCanCollideY
-                    || ballView.BallData.LastHittedCellGridPosition.x == gameFieldCellView.CellData.GridPosition.x)
+                if (!ballView.BallData.IsCanCollideY)
                 {
                     return;
                 }
@@ -89,7 +87,6 @@ namespace Balls.Implementations.Systems
                 ballView.BallData.IsCanCollideY = false;
             }
 
-            ballView.BallData.LastHittedCellGridPosition = gameFieldCellView.CellData.GridPosition;
             _gameFieldInteractor.SetCellActive(gameFieldCellView, false);
 
             ballView.BallData.Speed += ballView.BallData.SpeedStep;

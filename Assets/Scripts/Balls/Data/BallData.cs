@@ -38,10 +38,5 @@ namespace Balls.Data
         /// Флаг возможность сколайдиться по Y
         /// </summary>
         public bool IsCanCollideY;
-
-        /// <summary>
-        /// Позиция последней ударенной ячейки
-        /// </summary>
-        public Vector2Int LastHittedCellGridPosition;
     }
 }

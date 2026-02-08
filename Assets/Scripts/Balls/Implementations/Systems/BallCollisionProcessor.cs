@@ -4,6 +4,7 @@ using Common.Interfaces;
 using GameField.Interfaces;
 using Racket.Interfaces;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Balls.Implementations.Systems
 {
@@ -67,7 +68,8 @@ namespace Balls.Implementations.Systems
 
             if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             {
-                if (!ballView.BallData.IsCanCollideX)
+                if (!ballView.BallData.IsCanCollideX 
+                    || ballView.BallData.LastHittedCellGridPosition.y == gameFieldCellView.CellData.GridPosition.y)
                 {
                     return;
                 }
@@ -77,7 +79,8 @@ namespace Balls.Implementations.Systems
             }
             else
             {
-                if (!ballView.BallData.IsCanCollideY)
+                if (!ballView.BallData.IsCanCollideY
+                    || ballView.BallData.LastHittedCellGridPosition.x == gameFieldCellView.CellData.GridPosition.x)
                 {
                     return;
                 }
@@ -86,6 +89,7 @@ namespace Balls.Implementations.Systems
                 ballView.BallData.IsCanCollideY = false;
             }
 
+            ballView.BallData.LastHittedCellGridPosition = gameFieldCellView.CellData.GridPosition;
             _gameFieldInteractor.SetCellActive(gameFieldCellView, false);
 
             ballView.BallData.Speed += ballView.BallData.SpeedStep;
@@ -113,14 +117,14 @@ namespace Balls.Implementations.Systems
             {
                 var racketDirection = ballView.Transform.position - racketView.Transform.position;
                 ballView.BallData.Direction.x = racketDirection.x * 2 / racketView.RacketData.Width;
-                ballView.BallData.Direction.y = -ballView.BallData.Direction.y;
+                ballView.BallData.Direction.y = 1;
                 ballView.BallData.Direction = ballView.BallData.Direction.normalized;
 
                 if (isBallInRacket)
                 {
                     var ballPosition = ballView.Transform.position;
                     ballPosition.y += ballView.BallData.Size.y + racketView.RacketData.Height;
-                    ballView.Transform.position = ballPosition;
+                    ballView.Rigidbody2D.MovePosition(ballPosition);
                 }
             }
         }

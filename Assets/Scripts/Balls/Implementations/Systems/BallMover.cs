@@ -68,6 +68,7 @@ namespace Balls.Implementations.Systems
                 ballView.Rigidbody2D.MovePosition(position);
                 ballView.BallData.IsCanCollideX = true;
                 ballView.BallData.IsCanCollideY = true;
+                ballView.BallData.LastHittedCellGridPosition = -Vector2Int.one;
 
                 if (isBallLost)
                 {

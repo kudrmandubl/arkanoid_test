@@ -54,7 +54,8 @@ namespace Balls.Implementations.Systems
             ballView.SizableTransform.localScale = Vector3.one * _ballsConfig.BallSize;
             ballView.Transform.position = _racketInteractor.RacketView.Transform.position 
                 + Vector3.up * _racketInteractor.RacketView.SizableTransform.lossyScale.y * 0.5f
-                + Vector3.up * _ballsConfig.BallSize.y * 0.5f;
+                + Vector3.up * _ballsConfig.BallSize.y * 0.5f
+                + Vector3.up * _ballsConfig.ExtraStartBallPositionY;
             
             ballView.BallData = _ballDataPool.GetFreeElement();
             ballView.BallData.Size = _ballsConfig.BallSize;

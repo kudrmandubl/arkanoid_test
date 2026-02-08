@@ -52,7 +52,7 @@ namespace Balls.Implementations.Systems
                 var ballView = _ballInteractor.BallViews[i];
                 var position = ballView.Transform.position + ballView.BallData.Direction * ballView.BallData.Speed * deltaTime;
                 position = CheckAndApplyBorders(position, ballView.BallData, out var isBallLost);
-                ballView.Transform.position = position;
+                ballView.Rigidbody2D.MovePosition(position);
                 ballView.BallData.IsCanCollide = false;
 
                 if (isBallLost)

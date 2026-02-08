@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5e5a47e93fcdd4b93a4e49d74269a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Balls.Implementations.Views.BallView
+  _rigidbody2D: {fileID: 2683948679632796454}
   _mainSpriteRenderer: {fileID: 5955764952087672823}
   _sizableTransform: {fileID: 8386049135119685188}
 --- !u!50 &2683948679632796454

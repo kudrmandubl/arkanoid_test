@@ -15,4 +15,5 @@ MonoBehaviour:
   _ballViewPrefab: {fileID: 231361267027316479, guid: 196bb27d279c71243aecb7dc1ae199ed, type: 3}
   _ballSize: {x: 0.3, y: 0.3}
   _maxBallStartDirectionX: 1
-  _ballSpeed: 5
+  _ballSpeed: 15
+  _extraStartBallPositionY: 0.1

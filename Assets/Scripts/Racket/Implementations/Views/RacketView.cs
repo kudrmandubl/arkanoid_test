@@ -10,6 +10,11 @@ namespace Racket.Implementations.Views
     {
         [SerializeField] private SpriteRenderer _mainSpriteRenderer;
         [SerializeField] private Transform _sizableTransform;
+        [SerializeField] private Collider2D _collider2D;
+
+        ///  <inheritdoc />
+        public Collider2D Collider2D => _collider2D;
+
 
         ///  <inheritdoc />
         public SpriteRenderer MainSpriteRenderer => _mainSpriteRenderer;

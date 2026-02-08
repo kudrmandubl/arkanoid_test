@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Racket.Implementations.Views.RacketView
   _mainSpriteRenderer: {fileID: 5652738922360831894}
   _sizableTransform: {fileID: 2338412266576720560}
+  _collider2D: {fileID: 919066055549577048}
 --- !u!50 &6972484037368840708
 Rigidbody2D:
   serializedVersion: 5

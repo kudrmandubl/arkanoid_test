@@ -10,6 +10,11 @@ namespace Racket.Interfaces
     public interface IRacketView : IBaseView
     {
         /// <summary>
+        /// Коллайдер
+        /// </summary>
+        Collider2D Collider2D { get; }
+
+        /// <summary>
         /// Основной Спрайт рендерер 
         /// </summary>
         SpriteRenderer MainSpriteRenderer { get; }

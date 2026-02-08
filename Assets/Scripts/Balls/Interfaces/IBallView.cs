@@ -15,12 +15,17 @@ namespace Balls.Interfaces
         /// <summary>
         /// При вхождении в триггер ячейки игрового поля
         /// </summary>
-        Action<IBallView, IGameFieldCellView, Collider2D> OnGameFieldCellTriggerEnter { get; set; }
+        Action<IBallView, IGameFieldCellView> OnGameFieldCellTriggerEnter { get; set; }
 
         /// <summary>
         /// При вхождении в триггер ракетки
         /// </summary>
-        Action<IBallView, IRacketView, Collider2D> OnRacketTriggerEnter { get; set; }
+        Action<IBallView, IRacketView> OnRacketTriggerEnter { get; set; }
+
+        /// <summary>
+        /// Физическое тело
+        /// </summary>
+        Rigidbody2D Rigidbody2D { get; }
 
         /// <summary>
         /// Основной Спрайт рендерер 

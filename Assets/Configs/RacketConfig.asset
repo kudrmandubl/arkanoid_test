@@ -15,3 +15,4 @@ MonoBehaviour:
   _racketViewPrefab: {fileID: 5628835838180188016, guid: 8e2b6a6d8c03c954f94d05b006b19cfc, type: 3}
   _racketSize: {x: 2.5, y: 0.4}
   _racketPosition: {x: 0, y: -8}
+  _needAlternativeRacketLogic: 1

@@ -185,6 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameField.Implementations.Views.GameFieldCellView
   _mainSpriteRenderer: {fileID: 7770097846724891015}
   _sizableTransform: {fileID: 3753007433774719524}
+  _collider2D: {fileID: 306977570639288653}
 --- !u!50 &3727091542430497787
 Rigidbody2D:
   serializedVersion: 5

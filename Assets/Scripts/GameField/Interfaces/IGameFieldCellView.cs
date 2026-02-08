@@ -10,6 +10,11 @@ namespace GameField.Interfaces
     public interface IGameFieldCellView : IBaseView
     {
         /// <summary>
+        /// Коллайдер
+        /// </summary>
+        Collider2D Collider2D { get; }
+
+        /// <summary>
         /// Основной Спрайт рендерер 
         /// </summary>
         SpriteRenderer MainSpriteRenderer { get; }

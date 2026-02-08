@@ -1,5 +1,6 @@
 ﻿using Balls.Data;
 using Balls.Interfaces;
+using Cameras.Interfaces;
 using Common.Interfaces;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Balls.Implementations.Systems
         private IBallInteractor _ballInteractor;
         private IMonoBehaviourCycle _monoBehaviourCycle;
         private IBallCreator _ballCreator;
+        private ICameraWidthAdjuster _cameraWidthAdjuster;
 
         private bool _isActive;
         private float _screenLeft;
@@ -25,14 +27,17 @@ namespace Balls.Implementations.Systems
         public BallMover(IMainCamera mainCamera,
             IBallInteractor ballInteractor,
             IMonoBehaviourCycle monoBehaviourCycle,
-            IBallCreator ballCreator)
+            IBallCreator ballCreator,
+            ICameraWidthAdjuster cameraWidthAdjuster)
         {
             _mainCamera = mainCamera;
             _ballInteractor = ballInteractor;
             _monoBehaviourCycle = monoBehaviourCycle;
             _ballCreator = ballCreator;
+            _cameraWidthAdjuster = cameraWidthAdjuster;
 
             _monoBehaviourCycle.OnFixedUpdate += MoveBalls;
+            _cameraWidthAdjuster.OnCameraSizeChange += RefreshScreenBorders;
         }
 
         ///  <inheritdoc />

@@ -1,4 +1,5 @@
-﻿using Cameras.Configs;
+﻿using System;
+using Cameras.Configs;
 using Cameras.Interfaces;
 using Common.Interfaces;
 using UnityEngine;
@@ -14,6 +15,9 @@ namespace Cameras.Implementations.Systems
         private CameraConfig _cameraConfig; 
 
         private float _initialOrthographicSize;
+
+        ///  <inheritdoc />
+        public Action OnCameraSizeChange { get; set; }
 
         /// <summary>
         /// Конструктор
@@ -46,14 +50,21 @@ namespace Cameras.Implementations.Systems
         {
             var targetAspectRatio = _cameraConfig.AspectRatioWidth / _cameraConfig.AspectRatioHeight;
             var currentAspectRatio = _mainCamera.Camera.aspect;
+            var newSize = 0f;
             if (currentAspectRatio < targetAspectRatio)
             {
                 // Рассчитываем нужный orthographicSize так, чтобы ширина оставалась постоянной
-                _mainCamera.Camera.orthographicSize = _initialOrthographicSize * (targetAspectRatio / currentAspectRatio);
+                newSize = _initialOrthographicSize * (targetAspectRatio / currentAspectRatio);
             }
             else
             {
-                _mainCamera.Camera.orthographicSize = _initialOrthographicSize;
+                newSize = _initialOrthographicSize;
+            }
+
+            if(!Mathf.Approximately(_mainCamera.Camera.orthographicSize, newSize))
+            {
+                _mainCamera.Camera.orthographicSize = newSize;
+                OnCameraSizeChange?.Invoke();
             }
         }
 

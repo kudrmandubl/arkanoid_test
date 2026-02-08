@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Cameras.Interfaces
 {
     /// <summary>
@@ -6,6 +8,11 @@ namespace Cameras.Interfaces
     /// </summary>
     public interface ICameraWidthAdjuster
     {
+        /// <summary>
+        /// При изменении размера камеры
+        /// </summary>
+        Action OnCameraSizeChange { get; set; }
+
         /// <summary>
         /// Инициализировать
         /// </summary>

@@ -19,3 +19,4 @@ MonoBehaviour:
   _gameFieldConfig: {fileID: 11400000, guid: 21a1a2044eab5ad4f9ac4eb5663b354f, type: 2}
   _racketConfig: {fileID: 11400000, guid: 6876347a1fe545e4a88e526f1e4bc84a, type: 2}
   _ballsConfig: {fileID: 11400000, guid: 62fd163e3dc36a94bbea51d4d9cda8e7, type: 2}
+  _cameraConfig: {fileID: 11400000, guid: a750f24d488d2d040a13ad45bc5282f7, type: 2}

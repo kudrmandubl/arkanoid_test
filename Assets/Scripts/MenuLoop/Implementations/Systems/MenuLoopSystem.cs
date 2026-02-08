@@ -1,4 +1,5 @@
-﻿using Common;
+﻿using Cameras.Interfaces;
+using Common;
 using Common.Interfaces;
 using CoreGameLoop.Interfaces;
 using Cysharp.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace MenuLoop.Implementations.Systems
         private IScreenSystem _screenSystem;
         private IMainCamera _mainCamera;
         private IDataStorageSystem _dataStorageSystem;
+        private ICameraWidthAdjuster _cameraWidthAdjuster;
 
         /// <summary>
         /// Конструктор
@@ -24,12 +26,14 @@ namespace MenuLoop.Implementations.Systems
         public MenuLoopSystem(IMainMenu mainMenu,
             IScreenSystem screenSystem,
             IMainCamera mainCamera,
-            IDataStorageSystem dataStorageSystem)
+            IDataStorageSystem dataStorageSystem,
+            ICameraWidthAdjuster cameraWidthAdjuster)
         {
             _mainMenu = mainMenu;
             _screenSystem = screenSystem;
             _mainCamera = mainCamera;
             _dataStorageSystem = dataStorageSystem;
+            _cameraWidthAdjuster = cameraWidthAdjuster;
 
             StartMenuLoopAsync();
         }
@@ -39,6 +43,7 @@ namespace MenuLoop.Implementations.Systems
         {
             _screenSystem.Initialize(CanvasWithKey.GameSceneCanvasKey);
             _mainCamera.Initialize(CameraWithKey.GameSceneCameraKey);
+            _cameraWidthAdjuster.Initialize();
 
             _screenSystem.ShowScreen<ISimpleLoadingScreen>();
 

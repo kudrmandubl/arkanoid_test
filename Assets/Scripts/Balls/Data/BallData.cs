@@ -25,6 +25,11 @@ namespace Balls.Data
         public float Speed;
 
         /// <summary>
+        /// Шаг скорости
+        /// </summary>
+        public float SpeedStep;
+
+        /// <summary>
         /// Флаг возможность сколайдиться
         /// </summary>
         public bool IsCanCollide;

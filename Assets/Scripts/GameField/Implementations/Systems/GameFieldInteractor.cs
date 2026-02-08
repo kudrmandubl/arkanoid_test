@@ -1,7 +1,4 @@
-﻿using System.Linq;
-using DataStorage.Implementations.Systems;
-using DataStorage.Interfaces;
-using GameField.Data;
+﻿using GameField.Implementations.Views;
 using GameField.Interfaces;
 using UnityEngine;
 
@@ -12,14 +9,29 @@ namespace GameField.Implementations.Systems
     {
         private IGameFieldGridView _gameFieldGridView;
 
+        private int _activeCellCount;
+        private int _totalCellCount;
+
         ///  <inheritdoc />
         public IGameFieldGridView GameFieldGridView => _gameFieldGridView;
+
+        ///  <inheritdoc />
+        public int ActiveCellCount => _activeCellCount;
+
+        ///  <inheritdoc />
+        public int TotalCellCount => _totalCellCount;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         public GameFieldInteractor()
         {
+        }
+
+        ///  <inheritdoc />
+        public void Restart()
+        {
+            _totalCellCount = _gameFieldGridView.CellViews.Count;
         }
 
         ///  <inheritdoc />
@@ -47,6 +59,10 @@ namespace GameField.Implementations.Systems
         {
             gameFieldCellView.CellData.IsActive = value;
             gameFieldCellView.Transform.gameObject.SetActive(value);
+            if (!value)
+            {
+                _activeCellCount--;
+            }
         }
     }
 }

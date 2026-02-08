@@ -3,6 +3,7 @@ using Balls.Configs;
 using Balls.Data;
 using Balls.Interfaces;
 using Common.Interfaces;
+using GameField.Interfaces;
 using Racket.Interfaces;
 using UnityEngine;
 
@@ -16,6 +17,7 @@ namespace Balls.Implementations.Systems
         private IBallInteractor _ballInteractor;
         private IMonoBehaviourPool<IBallView> _ballViewPool;
         private IPool<BallData> _ballDataPool;
+        private IGameFieldInteractor _gameFieldInteractor;
 
         private BallsConfig _ballsConfig;
 
@@ -33,6 +35,7 @@ namespace Balls.Implementations.Systems
             IBallInteractor ballInteractor,
             IMonoBehaviourPool<IBallView> ballViewPool,
             IPool<BallData> ballDataPool,
+            IGameFieldInteractor gameFieldInteractor,
             BallsConfig ballsConfig)
         {
             _gameContainer = gameContainer;
@@ -40,6 +43,7 @@ namespace Balls.Implementations.Systems
             _ballInteractor = ballInteractor;
             _ballViewPool = ballViewPool;
             _ballDataPool = ballDataPool;
+            _gameFieldInteractor = gameFieldInteractor;
 
             _ballsConfig = ballsConfig;
 
@@ -60,7 +64,9 @@ namespace Balls.Implementations.Systems
             ballView.BallData = _ballDataPool.GetFreeElement();
             ballView.BallData.Size = _ballsConfig.BallSize;
             ballView.BallData.Direction = Vector3.up + Vector3.right * UnityEngine.Random.Range(-_ballsConfig.MaxBallStartDirectionX, _ballsConfig.MaxBallStartDirectionX);
+            ballView.BallData.Direction = ballView.BallData.Direction.normalized;
             ballView.BallData.Speed = _ballsConfig.BallSpeed;
+            ballView.BallData.SpeedStep = _ballsConfig.MaxExtraBallSpeed / _gameFieldInteractor.TotalCellCount;
 
             _ballInteractor.AddBall(ballView);
             OnCreateBall?.Invoke(ballView);

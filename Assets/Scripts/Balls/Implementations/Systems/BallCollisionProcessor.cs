@@ -83,6 +83,8 @@ namespace Balls.Implementations.Systems
             }
 
             _gameFieldInteractor.SetCellActive(gameFieldCellView, false);
+
+            ballView.BallData.Speed += ballView.BallData.SpeedStep;
         }
 
         /// <summary>
@@ -104,6 +106,7 @@ namespace Balls.Implementations.Systems
                 var racketDirection = ballView.Transform.position - racketView.Transform.position;
                 ballView.BallData.Direction.x = racketDirection.x * 2 / racketView.RacketData.Width;
                 ballView.BallData.Direction.y = -ballView.BallData.Direction.y;
+                ballView.BallData.Direction = ballView.BallData.Direction.normalized;
             }
         }
     }

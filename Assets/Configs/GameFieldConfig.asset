@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GameField.Configs.GameFieldConfig
   _gameFieldCellViewPrefab: {fileID: 4922870227203215924, guid: d7ed35bcb401bb242ac9cb25d594ed93, type: 3}
   _gameFieldGridViewPrefab: {fileID: 9061276497838063401, guid: c6268279bfc0d954e848364e80414e1e, type: 3}
-  _gameFieldSize: {x: 15, y: 25}
-  _gameFieldCellSize: {x: 2, y: 0.3}
-  _gameFieldCellPadding: 0.04
+  _gameFieldSize: {x: 30, y: 16}
+  _gameFieldCellSize: {x: 1, y: 0.5}
+  _gameFieldCellPadding: 0.05
   _gameFieldGridPosition: {x: 0, y: 5}

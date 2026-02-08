@@ -3,6 +3,7 @@ using Balls.Interfaces;
 using Common.Interfaces;
 using CoreGameLoop.Configs;
 using CoreGameLoop.Interfaces;
+using GameField.Implementations.Systems;
 using GameField.Interfaces;
 using Racket.Interfaces;
 using Screens.Interfaces;
@@ -21,6 +22,7 @@ namespace CoreGameLoop.Implementations.Systems
         private IBallMover _ballMover;
         private IBallInteractor _ballInteractor;
         private IBallCollisionProcessor _ballCollisionProcessor;
+        private IGameFieldInteractor _gameFieldInteractor;
 
         private CoreGameLoopConfig _coreGameLoopConfig;
 
@@ -40,6 +42,7 @@ namespace CoreGameLoop.Implementations.Systems
             IBallMover ballMover,
             IBallInteractor ballInteractor,
             IBallCollisionProcessor ballCollisionProcessor,
+            IGameFieldInteractor gameFieldInteractor,
             CoreGameLoopConfig coreGameLoopConfig)
         {
             _screenSystem = screenSystem;
@@ -50,6 +53,7 @@ namespace CoreGameLoop.Implementations.Systems
             _ballMover = ballMover;
             _ballInteractor = ballInteractor;
             _ballCollisionProcessor = ballCollisionProcessor;
+            _gameFieldInteractor = gameFieldInteractor;
 
             _coreGameLoopConfig = coreGameLoopConfig;
         }
@@ -86,6 +90,7 @@ namespace CoreGameLoop.Implementations.Systems
             var gameScreen = _screenSystem.ShowScreen<IGameScreen>();
 
             _gameFieldCreator.CreateGameField();
+            _gameFieldInteractor.Restart();
             _racketSystem.CreateRacket();
             _ballCreator.CreateBall();
 

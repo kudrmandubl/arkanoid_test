@@ -14,6 +14,7 @@ namespace Balls.Configs
         [SerializeField] private float _maxBallStartDirectionX;
         [SerializeField] private float _ballSpeed;
         [SerializeField] private float _extraStartBallPositionY = 0.1f;
+        [SerializeField] private float _maxExtraBallSpeed = 5f;
 
         /// <summary>
         /// Префаб шарика
@@ -39,5 +40,10 @@ namespace Balls.Configs
         /// Дополнительная стартовая позиция шарика по Y
         /// </summary>
         public float ExtraStartBallPositionY => _extraStartBallPositionY;
+
+        /// <summary>
+        /// Максимальная дополнительная скорость шарика
+        /// </summary>
+        public float MaxExtraBallSpeed => _maxExtraBallSpeed;
     }
 }

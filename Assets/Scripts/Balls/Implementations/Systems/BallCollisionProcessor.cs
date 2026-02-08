@@ -1,10 +1,7 @@
-﻿using Balls.Configs;
-using Balls.Data;
+﻿using System;
 using Balls.Interfaces;
 using Common.Interfaces;
-using GameField.Configs;
 using GameField.Interfaces;
-using Racket.Configs;
 using Racket.Interfaces;
 using UnityEngine;
 
@@ -18,7 +15,8 @@ namespace Balls.Implementations.Systems
         private IBallCreator _ballCreator;
         private IGameFieldInteractor _gameFieldInteractor;
 
-        private bool _isActive;
+        ///  <inheritdoc />
+        public Action<IGameFieldCellView> OnDestroyGameFieldCelLView { get; set; }
 
         /// <summary>
         /// Конструктор
@@ -85,6 +83,7 @@ namespace Balls.Implementations.Systems
             _gameFieldInteractor.SetCellActive(gameFieldCellView, false);
 
             ballView.BallData.Speed += ballView.BallData.SpeedStep;
+            OnDestroyGameFieldCelLView?.Invoke(gameFieldCellView);
         }
 
         /// <summary>

@@ -1,12 +1,11 @@
 ﻿using System;
 using Balls.Interfaces;
+using Buffs.Interfaces;
 using Common.Interfaces;
 using CoreGameLoop.Configs;
-using CoreGameLoop.Implementations.Views;
 using CoreGameLoop.Interfaces;
 using DataStorage.Data;
 using DataStorage.Interfaces;
-using GameField.Implementations.Systems;
 using GameField.Interfaces;
 using Racket.Interfaces;
 using Screens.Interfaces;
@@ -27,6 +26,7 @@ namespace CoreGameLoop.Implementations.Systems
         private IBallCollisionProcessor _ballCollisionProcessor;
         private IGameFieldInteractor _gameFieldInteractor;
         private IDataStorageSystem _dataStorageSystem;
+        private IBuffSystem _buffSystem;
 
         private CoreGameLoopConfig _coreGameLoopConfig;
 
@@ -50,6 +50,7 @@ namespace CoreGameLoop.Implementations.Systems
             IBallCollisionProcessor ballCollisionProcessor,
             IGameFieldInteractor gameFieldInteractor,
             IDataStorageSystem dataStorageSystem,
+            IBuffSystem buffSystem,
             CoreGameLoopConfig coreGameLoopConfig)
         {
             _screenSystem = screenSystem;
@@ -62,6 +63,7 @@ namespace CoreGameLoop.Implementations.Systems
             _ballCollisionProcessor = ballCollisionProcessor;
             _gameFieldInteractor = gameFieldInteractor;
             _dataStorageSystem = dataStorageSystem;
+            _buffSystem = buffSystem;
 
             _coreGameLoopConfig = coreGameLoopConfig;
         }
@@ -75,6 +77,8 @@ namespace CoreGameLoop.Implementations.Systems
             }
 
             _isInitialized = true;
+
+            _buffSystem.Initialize();
 
             var _coreBackView = GameObject.Instantiate(_coreGameLoopConfig.CoreBackViewPrefab, _gameContainer.CoreContainer);
             _coreBackView.transform.SetAsFirstSibling();
@@ -107,6 +111,7 @@ namespace CoreGameLoop.Implementations.Systems
 
             _racketSystem.SetControlActive(true);
             _ballMover.SetActive(true);
+            _buffSystem.SetActive(true);
         }
 
         /// <summary>
@@ -137,6 +142,9 @@ namespace CoreGameLoop.Implementations.Systems
             
             _racketSystem.SetControlActive(false);
             _ballMover.SetActive(false);
+            _buffSystem.SetActive(false);
+            _ballCreator.DestroyAllBalls();
+            _buffSystem.Clear();
             RefreshHighScore();
         }
 
@@ -148,6 +156,7 @@ namespace CoreGameLoop.Implementations.Systems
             _screenSystem.ShowScreen<IPauseScreen>(false);
             _racketSystem.SetControlActive(false);
             _ballMover.SetActive(false);
+            _buffSystem.SetActive(false);
         }
 
         /// <summary>
@@ -158,6 +167,7 @@ namespace CoreGameLoop.Implementations.Systems
             _screenSystem.HideScreen<IPauseScreen>();
             _racketSystem.SetControlActive(true);
             _ballMover.SetActive(true);
+            _buffSystem.SetActive(true);
         }
 
         /// <summary>
@@ -166,6 +176,7 @@ namespace CoreGameLoop.Implementations.Systems
         private void ToMenuButtonClick()
         {
             _ballCreator.DestroyAllBalls();
+            _buffSystem.Clear();
             OnBackToMenu?.Invoke();
             ClearScore();
         }

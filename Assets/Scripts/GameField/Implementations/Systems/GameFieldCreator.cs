@@ -57,10 +57,14 @@ namespace GameField.Implementations.Systems
             gameFieldGridView.Transform.localPosition = _gameFieldConfig.GameFieldGridPosition;
 
             var gameFieldCellViews = new List<IGameFieldCellView>();
+            var maxDeltaColor = _gameFieldConfig.EndCellColor - _gameFieldConfig.StartCellColor;
             for (int i = 0; i < _gameFieldConfig.GameFieldSize.x; i++)
             {
+                var deltaColorX = maxDeltaColor * i / (_gameFieldConfig.GameFieldSize.x - 1);
                 for (int j = 0; j < _gameFieldConfig.GameFieldSize.y; j++)
                 {
+                    var deltaColorY = maxDeltaColor * j / (_gameFieldConfig.GameFieldSize.y - 1);
+
                     var gameFieldCellView = GameObject.Instantiate(_gameFieldConfig.GameFieldCellViewPrefab, gameFieldGridView.CellsContainer);
                     gameFieldCellViews.Add(gameFieldCellView);
 
@@ -79,6 +83,8 @@ namespace GameField.Implementations.Systems
                     gameFieldCellView.Transform.localPosition = position;
 
                     gameFieldCellView.SizableTransform.localScale = Vector2.one * _gameFieldConfig.GameFieldCellSize - Vector2.one * _gameFieldConfig.GameFieldCellPadding;
+
+                    gameFieldCellView.MainSpriteRenderer.color = _gameFieldConfig.StartCellColor + (deltaColorX + deltaColorY) * 0.5f;
                 }
             }
 

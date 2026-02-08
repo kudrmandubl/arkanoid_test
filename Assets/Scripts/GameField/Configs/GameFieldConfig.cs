@@ -16,6 +16,8 @@ namespace GameField.Configs
         [SerializeField] private Vector2 _gameFieldCellSize;
         [SerializeField] private float _gameFieldCellPadding = 0.02f;
         [SerializeField] private Vector2 _gameFieldGridPosition;
+        [SerializeField] private Color _startCellColor;
+        [SerializeField] private Color _endCellColor;
 
         /// <summary>
         /// Префаб ячейки игрового поля
@@ -46,5 +48,15 @@ namespace GameField.Configs
         /// Позиция игровой сетки
         /// </summary>
         public Vector2 GameFieldGridPosition => _gameFieldGridPosition;
+
+        /// <summary>
+        /// Начальный цвет ячейки
+        /// </summary>
+        public Color StartCellColor => _startCellColor;
+
+        /// <summary>
+        /// Конечный цвет ячейки
+        /// </summary>
+        public Color EndCellColor => _endCellColor;
     }
 }

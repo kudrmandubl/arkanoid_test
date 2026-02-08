@@ -16,5 +16,7 @@ MonoBehaviour:
   _gameFieldGridViewPrefab: {fileID: 9061276497838063401, guid: c6268279bfc0d954e848364e80414e1e, type: 3}
   _gameFieldSize: {x: 30, y: 16}
   _gameFieldCellSize: {x: 1, y: 0.5}
-  _gameFieldCellPadding: 0.05
+  _gameFieldCellPadding: 0
   _gameFieldGridPosition: {x: 0, y: 5}
+  _startCellColor: {r: 0.9215687, g: 0.49803925, b: 0.5294118, a: 1}
+  _endCellColor: {r: 0.36078432, g: 0.3254902, b: 0.64705884, a: 1}

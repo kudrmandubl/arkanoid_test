@@ -76,7 +76,7 @@ namespace Racket.Implementations.Systems
         private void SetRacketWidth(IRacketView racketView, float width)
         {
             var scale = racketView.SizableTransform.localScale;
-            scale.x = width;
+            scale.x = Mathf.Max(width, _racketConfig.MinRacketWidth);
             racketView.SizableTransform.localScale = scale;
 
             racketView.RacketData.Width = width;

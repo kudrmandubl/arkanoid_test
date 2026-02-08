@@ -66,7 +66,8 @@ namespace Balls.Implementations.Systems
                 var position = ballView.Transform.position + ballView.BallData.Direction * ballView.BallData.Speed * deltaTime;
                 position = CheckAndApplyBorders(position, ballView.BallData, out var isBallLost);
                 ballView.Rigidbody2D.MovePosition(position);
-                ballView.BallData.IsCanCollide = false;
+                ballView.BallData.IsCanCollideX = true;
+                ballView.BallData.IsCanCollideY = true;
 
                 if (isBallLost)
                 {

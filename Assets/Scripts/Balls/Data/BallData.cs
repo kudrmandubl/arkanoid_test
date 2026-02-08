@@ -30,8 +30,13 @@ namespace Balls.Data
         public float SpeedStep;
 
         /// <summary>
-        /// Флаг возможность сколайдиться
+        /// Флаг возможность сколайдиться по X
         /// </summary>
-        public bool IsCanCollide;
+        public bool IsCanCollideX;
+
+        /// <summary>
+        /// Флаг возможность сколайдиться по Y
+        /// </summary>
+        public bool IsCanCollideY;
     }
 }

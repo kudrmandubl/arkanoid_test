@@ -76,6 +76,7 @@ namespace Balls.Implementations.Systems
                 for (int j = 0; j < count; j++)
                 {
                     var direction = UnityEngine.Random.onUnitSphere;
+                    direction.z = 0;
                     direction = direction.normalized; 
                     CreateBall(ballView.Transform.position, direction, ballView.BallData.Speed);
                 }

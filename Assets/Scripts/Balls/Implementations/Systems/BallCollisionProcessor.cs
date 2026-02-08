@@ -62,22 +62,28 @@ namespace Balls.Implementations.Systems
         /// <param name="gameFieldCellView"></param>
         private void ProcessBallCollideGameFieldCell(IBallView ballView, IGameFieldCellView gameFieldCellView)
         {
-            if (ballView.BallData.IsCanCollide)
-            {
-                return;
-            }
-            ballView.BallData.IsCanCollide = true;
-
             var collisionPosition = gameFieldCellView.Collider2D.bounds.ClosestPoint(ballView.Transform.position);
             var direction = ballView.Transform.position - collisionPosition;
 
             if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             {
+                if (!ballView.BallData.IsCanCollideX)
+                {
+                    return;
+                }
+
                 ballView.BallData.Direction.x = -ballView.BallData.Direction.x;
+                ballView.BallData.IsCanCollideX = false;
             }
             else
             {
+                if (!ballView.BallData.IsCanCollideY)
+                {
+                    return;
+                }
+
                 ballView.BallData.Direction.y = -ballView.BallData.Direction.y;
+                ballView.BallData.IsCanCollideY = false;
             }
 
             _gameFieldInteractor.SetCellActive(gameFieldCellView, false);

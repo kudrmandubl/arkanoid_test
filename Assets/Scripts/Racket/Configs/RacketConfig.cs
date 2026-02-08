@@ -12,6 +12,7 @@ namespace Racket.Configs
         [SerializeField] private RacketView _racketViewPrefab;
         [SerializeField] private Vector2 _racketSize;
         [SerializeField] private Vector2 _racketPosition;
+        [SerializeField] private float _minRacketWidth = 1f;
 
         /// <summary>
         /// Префаб ракетки
@@ -27,5 +28,10 @@ namespace Racket.Configs
         /// Позиция
         /// </summary>
         public Vector2 RacketPosition => _racketPosition;
+
+        /// <summary>
+        /// Минимальная ширина ракетки
+        /// </summary>
+        public float MinRacketWidth => _minRacketWidth;
     }
 }

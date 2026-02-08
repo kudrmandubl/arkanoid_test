@@ -25,9 +25,14 @@ namespace GameField.Interfaces
         int TotalCellCount { get; }
 
         /// <summary>
+        /// При уничтожении ячейки
+        /// </summary>
+        Action OnGameFieldCellDestroy { get; set; }
+
+        /// <summary>
         /// При уничтожении всех ячеек
         /// </summary>
-        Action OnAllGameFieldCellDestoyed { get; set; }
+        Action OnAllGameFieldCellDestroy { get; set; }
 
         /// <summary>
         /// Рестарт

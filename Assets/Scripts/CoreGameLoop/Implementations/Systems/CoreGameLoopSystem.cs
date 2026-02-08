@@ -2,7 +2,10 @@
 using Balls.Interfaces;
 using Common.Interfaces;
 using CoreGameLoop.Configs;
+using CoreGameLoop.Implementations.Views;
 using CoreGameLoop.Interfaces;
+using DataStorage.Data;
+using DataStorage.Interfaces;
 using GameField.Implementations.Systems;
 using GameField.Interfaces;
 using Racket.Interfaces;
@@ -23,10 +26,13 @@ namespace CoreGameLoop.Implementations.Systems
         private IBallInteractor _ballInteractor;
         private IBallCollisionProcessor _ballCollisionProcessor;
         private IGameFieldInteractor _gameFieldInteractor;
+        private IDataStorageSystem _dataStorageSystem;
 
         private CoreGameLoopConfig _coreGameLoopConfig;
 
         private bool _isInitialized;
+        private int _currentScore;
+        private IGameScreen _gameScreen;
 
         ///  <inheritdoc />
         public Action OnBackToMenu { get; set; }
@@ -43,6 +49,7 @@ namespace CoreGameLoop.Implementations.Systems
             IBallInteractor ballInteractor,
             IBallCollisionProcessor ballCollisionProcessor,
             IGameFieldInteractor gameFieldInteractor,
+            IDataStorageSystem dataStorageSystem,
             CoreGameLoopConfig coreGameLoopConfig)
         {
             _screenSystem = screenSystem;
@@ -54,6 +61,7 @@ namespace CoreGameLoop.Implementations.Systems
             _ballInteractor = ballInteractor;
             _ballCollisionProcessor = ballCollisionProcessor;
             _gameFieldInteractor = gameFieldInteractor;
+            _dataStorageSystem = dataStorageSystem;
 
             _coreGameLoopConfig = coreGameLoopConfig;
         }
@@ -71,7 +79,8 @@ namespace CoreGameLoop.Implementations.Systems
             var _coreBackView = GameObject.Instantiate(_coreGameLoopConfig.CoreBackViewPrefab, _gameContainer.CoreContainer);
             _coreBackView.transform.SetAsFirstSibling();
 
-            _screenSystem.GetScreen<IGameScreen>().TopPanel.BackButton.onClick.AddListener(PauseButtonClick);
+            _gameScreen = _screenSystem.GetScreen<IGameScreen>();
+            _gameScreen.TopPanel.BackButton.onClick.AddListener(PauseButtonClick);
 
             var pauseScreen = _screenSystem.GetScreen<IPauseScreen>();
             pauseScreen.ContinueButton.onClick.AddListener(ContinueAfterPauseButtonClick);
@@ -82,7 +91,8 @@ namespace CoreGameLoop.Implementations.Systems
             endGameScreen.ToMenuButton.onClick.AddListener(ToMenuButtonClick);
 
             _ballCreator.OnDestroyBall += CheckLose;
-            _gameFieldInteractor.OnAllGameFieldCellDestoyed += Win;
+            _gameFieldInteractor.OnAllGameFieldCellDestroy += Win;
+            _gameFieldInteractor.OnGameFieldCellDestroy += IncreaseScore;
         }
 
         ///  <inheritdoc />
@@ -113,6 +123,7 @@ namespace CoreGameLoop.Implementations.Systems
         private void Lose()
         {
             EndGame(false);
+            ClearScore();
         }
 
         /// <summary>
@@ -126,6 +137,7 @@ namespace CoreGameLoop.Implementations.Systems
             
             _racketSystem.SetControlActive(false);
             _ballMover.SetActive(false);
+            RefreshHighScore();
         }
 
         /// <summary>
@@ -155,6 +167,7 @@ namespace CoreGameLoop.Implementations.Systems
         {
             _ballCreator.DestroyAllBalls();
             OnBackToMenu?.Invoke();
+            ClearScore();
         }
 
         /// <summary>
@@ -168,6 +181,37 @@ namespace CoreGameLoop.Implementations.Systems
             }
 
             Lose();
+        }
+
+        /// <summary>
+        /// Увеличить счёт
+        /// </summary>
+        private void IncreaseScore()
+        {
+            _currentScore++;
+            _gameScreen.ScoreText.text = $"{_currentScore}";
+        }
+
+        /// <summary>
+        /// Очистить счёт
+        /// </summary>
+        private void ClearScore()
+        {
+            _currentScore = 0;
+            _gameScreen.ScoreText.text = $"{_currentScore}";
+        }
+
+        /// <summary>
+        /// Обновить максимальный счёт
+        /// </summary>
+        private void RefreshHighScore()
+        {
+            var playerStorageData = _dataStorageSystem.GetStorageData<PlayerStorageData>();
+            if(_currentScore > playerStorageData.HighScore)
+            {
+                playerStorageData.HighScore = _currentScore;
+                _dataStorageSystem.Save<PlayerStorageData>();
+            }
         }
     }
 }

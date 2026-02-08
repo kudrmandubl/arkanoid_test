@@ -11,14 +11,14 @@ namespace DataStorage.Data
         /// <summary>
         /// Максимальный счёт
         /// </summary>
-        public int _highScore;
+        public int HighScore;
 
         /// <summary>
         /// Конструктор
         /// </summary>
         public PlayerStorageData()
         {
-            _highScore = 0;
+            HighScore = 0;
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace DataStorage.Data
         /// </summary>
         public void Clear()
         {
-            _highScore = 0;
+            HighScore = 0;
         }
     }
 }

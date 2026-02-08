@@ -22,7 +22,10 @@ namespace GameField.Implementations.Systems
         public int TotalCellCount => _totalCellCount;
 
         ///  <inheritdoc />
-        public Action OnAllGameFieldCellDestoyed { get; set; }
+        public Action OnGameFieldCellDestroy { get; set; }
+
+        ///  <inheritdoc />
+        public Action OnAllGameFieldCellDestroy { get; set; }
 
         /// <summary>
         /// Конструктор
@@ -66,9 +69,10 @@ namespace GameField.Implementations.Systems
             if (!value)
             {
                 _activeCellCount--;
-                if(_activeCellCount <= 0)
+                OnGameFieldCellDestroy?.Invoke();
+                if (_activeCellCount <= 0)
                 {
-                    OnAllGameFieldCellDestoyed?.Invoke();
+                    OnAllGameFieldCellDestroy?.Invoke();
                 }
             }
         }

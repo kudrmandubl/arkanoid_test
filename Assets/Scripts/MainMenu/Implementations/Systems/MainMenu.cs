@@ -1,6 +1,8 @@
 ﻿using Common.Configs;
 using Common.Interfaces;
 using CoreGameLoop.Interfaces;
+using DataStorage.Data;
+using DataStorage.Interfaces;
 using MainMenu.Configs;
 using MainMenu.Interfaces;
 using Screens.Interfaces;
@@ -15,6 +17,7 @@ namespace MainMenu.Implementations.Systems
         private IGameContainer _gameContainer;
         private IMainCamera _mainCamera;
         private IMainMenuParallax _mainMenuParallax;
+        private IDataStorageSystem _dataStorageSystem;
 
         private MainMenuConfig _mainMenuConfig;
         private TweenAnimationsConfig _tweenAnimationsConfig;
@@ -27,6 +30,7 @@ namespace MainMenu.Implementations.Systems
             IGameContainer gameContainer,
             IMainCamera mainCamera,
             IMainMenuParallax mainMenuParallax,
+            IDataStorageSystem dataStorageSystem,
             MainMenuConfig mainMenuConfig,
             TweenAnimationsConfig tweenAnimationsConfig)
         {
@@ -35,6 +39,7 @@ namespace MainMenu.Implementations.Systems
             _gameContainer = gameContainer;
             _mainCamera = mainCamera;
             _mainMenuParallax = mainMenuParallax;
+            _dataStorageSystem = dataStorageSystem;
 
             _mainMenuConfig = mainMenuConfig;
             _tweenAnimationsConfig = tweenAnimationsConfig;
@@ -87,7 +92,8 @@ namespace MainMenu.Implementations.Systems
         /// </summary>
         private void FillMainMenuScreen()
         {
-
+            var playerStorageData = _dataStorageSystem.GetStorageData<PlayerStorageData>();
+            _screenSystem.GetScreen<IMainMenuScreen>().HighScoreText.text = $"{playerStorageData.HighScore}";
         }
     }
 }

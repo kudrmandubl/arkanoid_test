@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de00dbad2fa95c44aababd7006b06dc5, type: 3}
   m_Name: MainMenuConfig
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu.Configs.MainMenuConfig
-  _frontMaxParallaxOffset: 1
-  _backMaxParallaxOffset: 0.25
-  _parallaxSpeed: 0.3
+  _frontMaxParallaxOffset: 15
+  _backMaxParallaxOffset: 50
+  _parallaxSpeed: 5

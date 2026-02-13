@@ -112,6 +112,7 @@ namespace Balls.Implementations.Systems
         {
             var ballView = _ballViewPool.GetFreeElement();
             ballView.SizableTransform.localScale = Vector3.one * _ballsConfig.BallSize;
+            ballView.TrailRenderer.startWidth = _ballsConfig.BallSize.x;
             ballView.Transform.position = position; 
 
             ballView.BallData = _ballDataPool.GetFreeElement();

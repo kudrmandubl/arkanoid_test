@@ -38,6 +38,11 @@ namespace Balls.Interfaces
         Transform SizableTransform { get; }
 
         /// <summary>
+        /// Рендерер следа
+        /// </summary>
+        TrailRenderer TrailRenderer { get; }
+
+        /// <summary>
         /// Данные шарика
         /// </summary>
         BallData BallData { get; set; }

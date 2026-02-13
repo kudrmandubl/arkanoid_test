@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50811cbb013863840b415c0fe4c2ac4c, type: 3}
   m_Name: ShowMainMenuTweenAnimationConfig
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu.Configs.ShowMainMenuTweenAnimationConfig
-  _duration: 1
+  _duration: 0.6

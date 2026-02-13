@@ -14,6 +14,7 @@ namespace Balls.Implementations.Views
         [SerializeField] private Rigidbody2D _rigidbody2D;
         [SerializeField] private SpriteRenderer _mainSpriteRenderer;
         [SerializeField] private Transform _sizableTransform;
+        [SerializeField] private TrailRenderer _trailRenderer;
 
         ///  <inheritdoc />
         public Action<IBallView, IGameFieldCellView> OnGameFieldCellTriggerEnter { get; set; }
@@ -29,6 +30,9 @@ namespace Balls.Implementations.Views
 
         ///  <inheritdoc />
         public Transform SizableTransform => _sizableTransform;
+
+        ///  <inheritdoc />
+        public TrailRenderer TrailRenderer => _trailRenderer;
 
         ///  <inheritdoc />
         public BallData BallData { get; set; }

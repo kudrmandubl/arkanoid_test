@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a49a348b00fc5049aa71d78344d6b22, type: 3}
   m_Name: StartCoreGameTweenAnimationConfig
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu.Configs.StartCoreGameTweenAnimationConfig
-  _duration: 1
+  _duration: 0.6

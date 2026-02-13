@@ -16,6 +16,7 @@ namespace Balls.Configs
         [SerializeField] private float _extraStartBallPositionY = 0.1f;
         [SerializeField] private float _maxExtraBallSpeed = 5f;
         [SerializeField] private GameFieldCellDestroyParticlesView _gameFieldCellDestroyParticlesPrefab;
+        [SerializeField] private int _maxBallsCount = 100;
 
         /// <summary>
         /// Префаб шарика
@@ -51,5 +52,10 @@ namespace Balls.Configs
         /// Партиклы уничтожения ячейки игрового поля
         /// </summary>
         public GameFieldCellDestroyParticlesView GameFieldCellDestroyParticlesPrefab => _gameFieldCellDestroyParticlesPrefab;
+
+        /// <summary>
+        /// Максимальное количество шариков
+        /// </summary>
+        public int MaxBallsCount => _maxBallsCount;
     }
 }

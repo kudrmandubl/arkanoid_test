@@ -3,6 +3,7 @@ using Balls.Interfaces;
 using Buffs.Interfaces;
 using Common.Interfaces;
 using CoreGameLoop.Configs;
+using CoreGameLoop.Implementations.Views;
 using CoreGameLoop.Interfaces;
 using DataStorage.Data;
 using DataStorage.Interfaces;
@@ -34,6 +35,7 @@ namespace CoreGameLoop.Implementations.Systems
         private int _currentScore;
         private IGameScreen _gameScreen;
         private bool _gameEnded;
+        private int _level;
 
         ///  <inheritdoc />
         public Action OnBackToMenu { get; set; }
@@ -98,6 +100,8 @@ namespace CoreGameLoop.Implementations.Systems
             _ballCreator.OnDestroyBall += CheckLose;
             _gameFieldInteractor.OnAllGameFieldCellDestroy += Win;
             _gameFieldInteractor.OnGameFieldCellDestroy += IncreaseScore;
+
+            DropLevel();
         }
 
         ///  <inheritdoc />
@@ -122,6 +126,7 @@ namespace CoreGameLoop.Implementations.Systems
         private void Win()
         {
             EndGame(true);
+            IncreaseLevel();
         }
 
         /// <summary>
@@ -136,6 +141,7 @@ namespace CoreGameLoop.Implementations.Systems
 
             EndGame(false);
             ClearScore();
+            DropLevel();
         }
 
         /// <summary>
@@ -187,6 +193,7 @@ namespace CoreGameLoop.Implementations.Systems
             _buffSystem.Clear();
             OnBackToMenu?.Invoke();
             ClearScore();
+            DropLevel();
         }
 
         /// <summary>
@@ -231,6 +238,32 @@ namespace CoreGameLoop.Implementations.Systems
                 playerStorageData.HighScore = _currentScore;
                 _dataStorageSystem.Save<PlayerStorageData>();
             }
+        }
+
+        /// <summary>
+        /// Увеличить уровень
+        /// </summary>
+        private void IncreaseLevel()
+        {
+            SetLevel(_level + 1);
+        }
+
+        /// <summary>
+        /// Сбросить уровень
+        /// </summary>
+        private void DropLevel()
+        {
+            SetLevel(1);
+        }
+
+        /// <summary>
+        /// Установить уровень
+        /// </summary>
+        /// <param name="level"></param>
+        private void SetLevel(int level)
+        {
+            _level = level;
+            _screenSystem.GetScreen<GameScreen>().LevelText.text = $"{level}";
         }
     }
 }

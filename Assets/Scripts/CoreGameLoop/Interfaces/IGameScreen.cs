@@ -9,6 +9,11 @@ namespace CoreGameLoop.Interfaces
     public interface IGameScreen : IScreen
     {
         /// <summary>
+        /// Текст уровня
+        /// </summary>
+        TextMeshProUGUI LevelText { get; }
+
+        /// <summary>
         /// Текст очков
         /// </summary>
         TextMeshProUGUI ScoreText { get; }

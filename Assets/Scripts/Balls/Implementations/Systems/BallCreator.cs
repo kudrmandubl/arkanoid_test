@@ -88,6 +88,7 @@ namespace Balls.Implementations.Systems
         {
             _ballDataPool.Free(ballView.BallData);
             _ballViewPool.Free(ballView);
+            ballView.TrailRenderer.Clear();
             _ballInteractor.RemoveBall(ballView);
             OnDestroyBall?.Invoke(ballView);
         }
@@ -110,6 +111,11 @@ namespace Balls.Implementations.Systems
         /// <param name="speed"></param>
         private void CreateBall(Vector3 position, Vector3 direction, float speed)
         {
+            if(_ballInteractor.BallViews.Count >= _ballsConfig.MaxBallsCount)
+            {
+                return;
+            }
+
             var ballView = _ballViewPool.GetFreeElement();
             ballView.SizableTransform.localScale = Vector3.one * _ballsConfig.BallSize;
             ballView.TrailRenderer.startWidth = _ballsConfig.BallSize.x;

@@ -80,12 +80,12 @@ namespace MainMenu.Implementations.Systems
 
             ApplyParallax(_mainMenuScreen.FrontPart.transform, 
                 _frontStartPosition,
-                viewportPosition,
+                -viewportPosition,
                 _mainMenuConfig.FrontMaxParallaxOffset,
                 deltaTime);
             ApplyParallax(_mainMenuScreen.BackPart,
                 _backStartPosition,
-                viewportPosition,
+                -viewportPosition,
                 _mainMenuConfig.BackMaxParallaxOffset,
                 deltaTime);
 

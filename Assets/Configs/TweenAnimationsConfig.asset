@@ -12,4 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f72929a5374d14e98aec4c798edf9c, type: 3}
   m_Name: TweenAnimationsConfig
   m_EditorClassIdentifier: Assembly-CSharp::Common.Configs.TweenAnimationsConfig
-  _animationConfigs: []
+  _animationConfigs:
+  - {fileID: 11400000, guid: ffbbc5418c4dc624985244d509331892, type: 2}
+  - {fileID: 11400000, guid: f22122f59dee90449bb24e453444770b, type: 2}

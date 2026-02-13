@@ -29,5 +29,10 @@ namespace MainMenu.Interfaces
         /// Задняя часть
         /// </summary>
         Transform BackPart { get; }
+
+        /// <summary>
+        /// РектТрансформ заднего изображения
+        /// </summary>
+        RectTransform BackImageRectTransform { get; }
     }
 }

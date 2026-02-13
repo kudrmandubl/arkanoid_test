@@ -13,6 +13,7 @@ namespace MainMenu.Implementations.Views
         [SerializeField] private TextMeshProUGUI _highScoreText;
         [SerializeField] private Transform _frontPart;
         [SerializeField] private Transform _backPart;
+        [SerializeField] private RectTransform _backImageRectTransform;
 
         ///  <inheritdoc />
         public Button PlayButton => _playButton;
@@ -25,5 +26,8 @@ namespace MainMenu.Implementations.Views
 
         ///  <inheritdoc />
         public Transform BackPart => _backPart;
+
+        ///  <inheritdoc />
+        public RectTransform BackImageRectTransform => _backImageRectTransform;
     }
 }

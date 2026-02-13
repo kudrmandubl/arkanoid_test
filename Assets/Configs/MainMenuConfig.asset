@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: MainMenuConfig
   m_EditorClassIdentifier: Assembly-CSharp::MainMenu.Configs.MainMenuConfig
   _frontMaxParallaxOffset: 15
-  _backMaxParallaxOffset: 50
+  _backMaxParallaxOffset: 25
   _parallaxSpeed: 5

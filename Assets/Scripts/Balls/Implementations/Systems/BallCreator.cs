@@ -55,7 +55,7 @@ namespace Balls.Implementations.Systems
         public void CreateBall()
         {
             var position = _racketInteractor.RacketView.Transform.position
-                + Vector3.up * _racketInteractor.RacketView.SizableTransform.lossyScale.y * 0.5f
+                + Vector3.up * _racketInteractor.RacketView.MainSpriteRenderer.size.y * 0.5f
                 + Vector3.up * _ballsConfig.BallSize.y * 0.5f
                 + Vector3.up * _ballsConfig.ExtraStartBallPositionY;
             var direction = Vector3.up + Vector3.right * UnityEngine.Random.Range(-_ballsConfig.MaxBallStartDirectionX, _ballsConfig.MaxBallStartDirectionX);

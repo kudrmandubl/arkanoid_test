@@ -12,17 +12,12 @@ namespace Racket.Interfaces
         /// <summary>
         /// Коллайдер
         /// </summary>
-        Collider2D Collider2D { get; }
+        BoxCollider2D BoxCollider2D { get; }
 
         /// <summary>
         /// Основной Спрайт рендерер 
         /// </summary>
         SpriteRenderer MainSpriteRenderer { get; }
-
-        /// <summary>
-        /// Транcформ для изменения размера
-        /// </summary>
-        Transform SizableTransform { get; }
 
         /// <summary>
         /// Данные ракетки

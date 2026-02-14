@@ -88,7 +88,7 @@ namespace Balls.Implementations.Systems
         /// <param name="racketView"></param>
         private void ProcessBallCollideRacket(IBallView ballView, IRacketView racketView)
         {
-            var collisionPosition = racketView.Collider2D.bounds.ClosestPoint(ballView.Transform.position);
+            var collisionPosition = racketView.BoxCollider2D.bounds.ClosestPoint(ballView.Transform.position);
             var direction = ballView.Transform.position - collisionPosition;
             var isBallInRacket = ballView.Transform.position.Equals(collisionPosition);
 

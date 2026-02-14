@@ -47,7 +47,8 @@ namespace Racket.Implementations.Systems
             if(_racketView == null)
             {
                 _racketView = GameObject.Instantiate(_racketConfig.RacketViewPrefab, _gameContainer.CoreContainer);
-                _racketView.SizableTransform.localScale = Vector2.one * _racketConfig.RacketSize;
+                _racketView.MainSpriteRenderer.size = Vector2.one * _racketConfig.RacketSize;
+                _racketView.BoxCollider2D.size = _racketView.MainSpriteRenderer.size;
                 _racketView.RacketData = new RacketData();
                 _racketView.RacketData.Height = _racketConfig.RacketSize.y;
                 _racketInteractor.SetRacket(_racketView);
@@ -77,9 +78,10 @@ namespace Racket.Implementations.Systems
         /// <param name="width"></param>
         private void SetRacketWidth(IRacketView racketView, float width)
         {
-            var scale = racketView.SizableTransform.localScale;
-            scale.x = Mathf.Max(width, _racketConfig.MinRacketWidth);
-            racketView.SizableTransform.localScale = scale;
+            var size = racketView.MainSpriteRenderer.size;
+            size.x = Mathf.Max(width, _racketConfig.MinRacketWidth);
+            racketView.MainSpriteRenderer.size = size;
+            racketView.BoxCollider2D.size = size;
 
             racketView.RacketData.Width = width;
         }

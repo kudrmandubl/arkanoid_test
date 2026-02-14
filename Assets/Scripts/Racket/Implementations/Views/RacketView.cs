@@ -9,18 +9,13 @@ namespace Racket.Implementations.Views
     public class RacketView : CachedMonoBehaviour, IRacketView
     {
         [SerializeField] private SpriteRenderer _mainSpriteRenderer;
-        [SerializeField] private Transform _sizableTransform;
-        [SerializeField] private Collider2D _collider2D;
+        [SerializeField] private BoxCollider2D _boxCollider2D;
 
         ///  <inheritdoc />
-        public Collider2D Collider2D => _collider2D;
-
+        public BoxCollider2D BoxCollider2D => _boxCollider2D;
 
         ///  <inheritdoc />
         public SpriteRenderer MainSpriteRenderer => _mainSpriteRenderer;
-
-        ///  <inheritdoc />
-        public Transform SizableTransform => _sizableTransform;
 
         ///  <inheritdoc />
         public RacketData RacketData { get; set; }

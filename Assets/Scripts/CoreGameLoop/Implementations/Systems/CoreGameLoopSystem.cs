@@ -36,6 +36,8 @@ namespace CoreGameLoop.Implementations.Systems
         private IGameScreen _gameScreen;
         private bool _gameEnded;
         private int _level;
+        private int _triesCount;
+        private bool _win;
 
         ///  <inheritdoc />
         public Action OnBackToMenu { get; set; }
@@ -94,14 +96,14 @@ namespace CoreGameLoop.Implementations.Systems
             pauseScreen.ToMenuButton.onClick.AddListener(ToMenuButtonClick);
 
             var endGameScreen = _screenSystem.GetScreen<IEndGameScreen>();
-            endGameScreen.ContinueButton.onClick.AddListener(StartGameLoop);
+            endGameScreen.ContinueButton.onClick.AddListener(EndGameContinueButtonClick);
             endGameScreen.ToMenuButton.onClick.AddListener(ToMenuButtonClick);
 
             _ballCreator.OnDestroyBall += CheckLose;
             _gameFieldInteractor.OnAllGameFieldCellDestroy += Win;
             _gameFieldInteractor.OnGameFieldCellDestroy += IncreaseScore;
 
-            DropLevel();
+            DropRunData();
         }
 
         ///  <inheritdoc />
@@ -140,9 +142,8 @@ namespace CoreGameLoop.Implementations.Systems
                 return;
             }
 
+            AddTriesCount(-1);
             EndGame(false);
-            ClearScore();
-            DropLevel();
         }
 
         /// <summary>
@@ -152,9 +153,17 @@ namespace CoreGameLoop.Implementations.Systems
         private void EndGame(bool win)
         {
             var endGameScreen = _screenSystem.ShowScreen<IEndGameScreen>();
+            endGameScreen.TriesCountRoot.SetActive(!win);
+            endGameScreen.TriesCountText.text = $"{_triesCount}";
             endGameScreen.ResultText.text = win ? _coreGameLoopConfig.WinLabel : _coreGameLoopConfig.LoseLabel;
+            endGameScreen.ContinueButtonText.text = win 
+                ? _coreGameLoopConfig.ContinueLabel
+                : _triesCount > 0
+                ? _coreGameLoopConfig.RestartLevelLabel
+                : _coreGameLoopConfig.StartNewRunLabel;
 
             _gameEnded = true;
+            _win = win;
             _racketSystem.SetControlActive(false);
             _ballMover.SetActive(false);
             _buffSystem.SetActive(false);
@@ -194,7 +203,20 @@ namespace CoreGameLoop.Implementations.Systems
             _buffSystem.Clear();
             OnBackToMenu?.Invoke();
             ClearScore();
-            DropLevel();
+            DropRunData();
+        }
+
+        /// <summary>
+        /// Нажатие кнопки продолжить в окне окончания игры
+        /// </summary>
+        private void EndGameContinueButtonClick()
+        {
+            if(!_win && _triesCount <= 0)
+            {
+                ClearScore();
+                DropRunData();
+            }
+            StartGameLoop();
         }
 
         /// <summary>
@@ -250,11 +272,12 @@ namespace CoreGameLoop.Implementations.Systems
         }
 
         /// <summary>
-        /// Сбросить уровень
+        /// Сбросить данные текущего забега
         /// </summary>
-        private void DropLevel()
+        private void DropRunData()
         {
             SetLevel(1);
+            SetTriesCount(_coreGameLoopConfig.DefaultTriesCount);
         }
 
         /// <summary>
@@ -265,6 +288,24 @@ namespace CoreGameLoop.Implementations.Systems
         {
             _level = level;
             _screenSystem.GetScreen<GameScreen>().LevelText.text = $"{level}";
+        }
+
+        /// <summary>
+        /// Добавить количество попыток
+        /// </summary>
+        /// <param name="value"></param>
+        private void AddTriesCount(int value)
+        {
+            SetTriesCount(_triesCount + value);
+        }
+
+        /// <summary>
+        /// Установить количество попыток
+        /// </summary>
+        /// <param name="triesCount"></param>
+        private void SetTriesCount(int triesCount)
+        {
+            _triesCount = triesCount;
         }
     }
 }

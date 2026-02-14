@@ -15,6 +15,10 @@ MonoBehaviour:
   _coreBackViewPrefab: {fileID: 1873949299369545577, guid: c83d05eee3cbdc543a98d4ae40372743, type: 3}
   _winLabel: Win
   _loseLabel: Lose
+  _defaultTriesCount: 3
+  _continueLabel: Continue
+  _restartLevelLabel: Restart Level
+  _startNewRunLabel: Start New
   _levelConfigsData:
   - _gameFieldCreateParams:
       _explosiveCellStep: 5

@@ -10,6 +10,7 @@ namespace Buffs.Configs
     public class BuffConfig : ScriptableObject
     {
         [SerializeField] private BuffType _buffType;
+        [SerializeField] private float _chance;
         [SerializeField] private int _intValue;
         [SerializeField] private float _floatValue;
 
@@ -17,6 +18,11 @@ namespace Buffs.Configs
         /// Тип бафа
         /// </summary>
         public BuffType BuffType => _buffType;
+
+        /// <summary>
+        /// Шанс
+        /// </summary>
+        public float Chance => _chance;
 
         /// <summary>
         /// Инт значение
@@ -27,5 +33,6 @@ namespace Buffs.Configs
         /// Флоат значение
         /// </summary>
         public float FloatValue => _floatValue;
+
     }
 }

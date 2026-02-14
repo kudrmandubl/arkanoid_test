@@ -10,11 +10,15 @@ namespace CoreGameLoop.Implementations.Views
     {
         [SerializeField] private TextMeshProUGUI _levelText;
         [SerializeField] private TextMeshProUGUI _scoreText;
+        [SerializeField] private TextMeshProUGUI _triesCountText;
 
         ///  <inheritdoc />
         public TextMeshProUGUI LevelText => _levelText;
 
         ///  <inheritdoc />
         public TextMeshProUGUI ScoreText => _scoreText;
+
+        ///  <inheritdoc />
+        public TextMeshProUGUI TriesCountText => _triesCountText;
     }
 }

@@ -17,5 +17,10 @@ namespace CoreGameLoop.Interfaces
         /// Текст очков
         /// </summary>
         TextMeshProUGUI ScoreText { get; }
+
+        /// <summary>
+        /// Текст количества попыток
+        /// </summary>
+        TextMeshProUGUI TriesCountText { get; }
     }
 }

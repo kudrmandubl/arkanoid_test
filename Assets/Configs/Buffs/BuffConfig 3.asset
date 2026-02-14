@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: BuffConfig 3
   m_EditorClassIdentifier: Assembly-CSharp::Buffs.Configs.BuffConfig
   _buffType: 3
+  _chance: 1
   _intValue: 0
   _floatValue: -2

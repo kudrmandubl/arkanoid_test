@@ -6,5 +6,7 @@
         BallsMultiply,
         RacketSizeIncrease,
         RacketSizerDecrease,
+        AddLive,
+        AddManyLives,
     }
 }

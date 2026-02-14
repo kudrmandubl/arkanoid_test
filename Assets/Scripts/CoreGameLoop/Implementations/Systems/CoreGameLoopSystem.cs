@@ -103,6 +103,8 @@ namespace CoreGameLoop.Implementations.Systems
             _gameFieldInteractor.OnAllGameFieldCellDestroy += Win;
             _gameFieldInteractor.OnGameFieldCellDestroy += IncreaseScore;
 
+            _buffSystem.OnApplyAddLivesBuff += AddTriesCount;
+
             DropRunData();
         }
 
@@ -306,6 +308,7 @@ namespace CoreGameLoop.Implementations.Systems
         private void SetTriesCount(int triesCount)
         {
             _triesCount = triesCount;
+            _screenSystem.GetScreen<GameScreen>().TriesCountText.text = $"{triesCount}";
         }
     }
 }

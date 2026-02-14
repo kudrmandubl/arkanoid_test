@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Balls.Implementations.Views;
 using Balls.Interfaces;
 using Buffs.Configs;
@@ -29,6 +30,10 @@ namespace Buffs.Implementations.Systems
 
         private List<IBuffView> _buffViews;
         private bool _isActive;
+        private float _sumBuffChance;
+
+        ///  <inheritdoc />
+        public Action<int> OnApplyAddLivesBuff { get; set; }
 
         /// <summary>
         /// Конструктор
@@ -67,7 +72,12 @@ namespace Buffs.Implementations.Systems
         ///  <inheritdoc />
         public void Initialize()
         {
-            _gameFieldInteractor.OnGameFieldCellDestroyExtended+= CreateBuff;
+            _gameFieldInteractor.OnGameFieldCellDestroyExtended += CreateBuff;
+
+            for (int i = 0; i < _buffsConfig.BuffConfigs.Length; i++)
+            {
+                _sumBuffChance += _buffsConfig.BuffConfigs[i].Chance;
+            }
         }
 
         ///  <inheritdoc />
@@ -96,7 +106,20 @@ namespace Buffs.Implementations.Systems
                 return;
             }
 
-            var randomBuffConfig = _buffsConfig.BuffConfigs[UnityEngine.Random.Range(0, _buffsConfig.BuffConfigs.Length)];
+            var random = UnityEngine.Random.Range(0f, _sumBuffChance);
+            BuffConfig randomBuffConfig = null;
+            for (int i = 0; i < _buffsConfig.BuffConfigs.Length; i++)
+            {
+                var buffConfig = _buffsConfig.BuffConfigs[i];
+                if(random <= buffConfig.Chance)
+                {
+                    randomBuffConfig = buffConfig;
+                    break;
+                }
+
+                random -= buffConfig.Chance;
+            }
+
             var buffView = _buffViewPool.GetFreeElement();
             buffView.Transform.position = gameFieldCellView.Transform.position;
 
@@ -196,6 +219,11 @@ namespace Buffs.Implementations.Systems
             else if(buffData.BuffType == BuffType.BallsMultiply)
             {
                 _ballCreator.CreateExtraBalls(buffData.IntValue);
+            }
+            else if(buffData.BuffType == BuffType.AddLive
+                || buffData.BuffType == BuffType.AddManyLives)
+            {
+                OnApplyAddLivesBuff?.Invoke(buffData.IntValue);
             }
         }
     }

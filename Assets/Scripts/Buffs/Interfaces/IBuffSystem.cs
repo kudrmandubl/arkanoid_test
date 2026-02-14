@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace Buffs.Interfaces
 {
     /// <summary>
@@ -6,6 +8,11 @@ namespace Buffs.Interfaces
     /// </summary>
     public interface IBuffSystem
     {
+        /// <summary>
+        /// При применении бафа добавления жизней
+        /// </summary>
+        Action<int> OnApplyAddLivesBuff { get; set; }
+
         /// <summary>
         /// Инициализация
         /// </summary>

@@ -1,5 +1,4 @@
-﻿using GameField.Data;
-using GameField.Implementations.Views;
+﻿using GameField.Implementations.Views;
 using UnityEngine;
 
 namespace GameField.Configs
@@ -16,8 +15,8 @@ namespace GameField.Configs
         [SerializeField] private Vector2 _gameFieldCellSize;
         [SerializeField] private float _gameFieldCellPadding = 0.02f;
         [SerializeField] private Vector2 _gameFieldGridPosition;
-        [SerializeField] private Color _startCellColor;
-        [SerializeField] private Color _endCellColor;
+        [SerializeField] private GameFieldCellDestroyParticlesView _gameFieldCellDestroyParticlesPrefab;
+        [SerializeField] private GameFieldCellExplosionParticlesView _gameFieldCellExplosionParticlesPrefab;
 
         /// <summary>
         /// Префаб ячейки игрового поля
@@ -50,13 +49,13 @@ namespace GameField.Configs
         public Vector2 GameFieldGridPosition => _gameFieldGridPosition;
 
         /// <summary>
-        /// Начальный цвет ячейки
+        /// Партиклы уничтожения ячейки игрового поля
         /// </summary>
-        public Color StartCellColor => _startCellColor;
+        public GameFieldCellDestroyParticlesView GameFieldCellDestroyParticlesPrefab => _gameFieldCellDestroyParticlesPrefab;
 
         /// <summary>
-        /// Конечный цвет ячейки
+        /// Партиклы уничтожения ячейки игрового поля
         /// </summary>
-        public Color EndCellColor => _endCellColor;
+        public GameFieldCellExplosionParticlesView GameFieldCellExplosionParticlesPrefab => _gameFieldCellExplosionParticlesPrefab;
     }
 }

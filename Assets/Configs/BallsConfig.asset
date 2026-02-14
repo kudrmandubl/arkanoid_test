@@ -18,4 +18,4 @@ MonoBehaviour:
   _ballSpeed: 15
   _extraStartBallPositionY: 0.1
   _maxExtraBallSpeed: 5
-  _gameFieldCellDestroyParticlesPrefab: {fileID: 6779013577321379072, guid: 1ebaf2812a360644b9e323dc9010ed99, type: 3}
+  _maxBallsCount: 200

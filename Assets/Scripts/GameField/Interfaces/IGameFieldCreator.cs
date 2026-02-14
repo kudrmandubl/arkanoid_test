@@ -1,4 +1,5 @@
-﻿
+﻿using GameField.Data;
+
 namespace GameField.Interfaces
 {
     /// <summary>
@@ -10,6 +11,6 @@ namespace GameField.Interfaces
         /// Создать игровое поле
         /// </summary>
         /// <returns></returns>
-        IGameFieldGridView CreateGameField();
+        IGameFieldGridView CreateGameField(GameFieldCreateParams createParams);
     }
 }

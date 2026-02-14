@@ -12,6 +12,7 @@ namespace CoreGameLoop.Configs
         [SerializeField] private CoreBackView _coreBackViewPrefab;
         [SerializeField] private string _winLabel = "Win";
         [SerializeField] private string _loseLabel = "Lose";
+        [SerializeField] private LevelConfigData[] _levelConfigsData;
 
         /// <summary>
         /// Префаб отображения фона кора
@@ -27,5 +28,10 @@ namespace CoreGameLoop.Configs
         /// Надпись проигрыша
         /// </summary>
         public string LoseLabel => _loseLabel;
+
+        /// <summary>
+        /// Данные конфигов уровней
+        /// </summary>
+        public LevelConfigData[] LevelConfigsData => _levelConfigsData;
     }
 }

@@ -1,13 +1,11 @@
 ﻿using System;
 using Balls.Configs;
 using Balls.Data;
-using Balls.Implementations.Views;
 using Balls.Interfaces;
 using Common.Interfaces;
 using GameField.Interfaces;
 using Racket.Interfaces;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 namespace Balls.Implementations.Systems
 {

@@ -4,7 +4,6 @@ using Balls.Implementations.Views;
 using Balls.Interfaces;
 using Common.Implementations.Systems.Pools;
 using Common.Interfaces;
-using NUnit.Framework.Interfaces;
 using Zenject;
 
 namespace Balls.DI
@@ -20,7 +19,6 @@ namespace Balls.DI
         public override void InstallBindings()
         {
             Container.Bind<IMonoBehaviourPool<IBallView>>().To<MonoBehaviourPool<IBallView, BallView>>().AsCached();
-            Container.Bind<IMonoBehaviourPool<IGameFieldCellDestroyParticlesView>>().To<MonoBehaviourPool<IGameFieldCellDestroyParticlesView, GameFieldCellDestroyParticlesView>>().AsCached();
             Container.Bind<IPool<BallData>>().To<SimplePool<BallData, BallData>>().AsCached();
             Container.Bind<IBallInteractor>().To<BallInteractor>().AsCached();
             Container.Bind<IBallCreator>().To<BallCreator>().AsCached();

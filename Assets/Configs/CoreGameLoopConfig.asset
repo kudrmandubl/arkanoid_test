@@ -13,3 +13,22 @@ MonoBehaviour:
   m_Name: CoreGameLoopConfig
   m_EditorClassIdentifier: Assembly-CSharp::CoreGameLoop.Configs.CoreGameLoopConfig
   _coreBackViewPrefab: {fileID: 1873949299369545577, guid: c83d05eee3cbdc543a98d4ae40372743, type: 3}
+  _winLabel: Win
+  _loseLabel: Lose
+  _levelConfigsData:
+  - _gameFieldCreateParams:
+      _explosiveCellStep: 5
+      _startCellColor: {r: 1, g: 0.38431376, b: 0, a: 1}
+      _endCellColor: {r: 1, g: 0.79215693, b: 0, a: 1}
+  - _gameFieldCreateParams:
+      _explosiveCellStep: 11
+      _startCellColor: {r: 0.17254902, g: 0.09019608, b: 0.69411767, a: 1}
+      _endCellColor: {r: 0.50585395, g: 0.098789506, b: 0.6981132, a: 1}
+  - _gameFieldCreateParams:
+      _explosiveCellStep: 7
+      _startCellColor: {r: 1, g: 0.79215693, b: 0, a: 1}
+      _endCellColor: {r: 0.69803923, g: 0.098039225, b: 0.5254902, a: 1}
+  - _gameFieldCreateParams:
+      _explosiveCellStep: 15
+      _startCellColor: {r: 0.7433963, g: 0.17378911, b: 0.11641861, a: 1}
+      _endCellColor: {r: 0.34359252, g: 0.81886786, b: 0.09733708, a: 1}

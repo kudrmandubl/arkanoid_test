@@ -11,6 +11,7 @@ namespace GameField.Implementations.Views
         [SerializeField] private SpriteRenderer _mainSpriteRenderer;
         [SerializeField] private Transform _sizableTransform;
         [SerializeField] private Collider2D _collider2D;
+        [SerializeField] private GameObject _explosiveRoot;
 
         ///  <inheritdoc />
         public Collider2D Collider2D => _collider2D;
@@ -20,6 +21,9 @@ namespace GameField.Implementations.Views
 
         ///  <inheritdoc />
         public Transform SizableTransform => _sizableTransform;
+
+        ///  <inheritdoc />
+        public GameObject ExplosiveRoot => _explosiveRoot;
 
         ///  <inheritdoc />
         public GameFieldCellData CellData { get; set; }

@@ -25,6 +25,11 @@ namespace GameField.Interfaces
         Transform SizableTransform { get; }
 
         /// <summary>
+        /// Корень объекта показывающего взрываемость ячейки
+        /// </summary>
+        GameObject ExplosiveRoot { get; }
+
+        /// <summary>
         /// Данные ячейки
         /// </summary>
         GameFieldCellData CellData { get; set; }

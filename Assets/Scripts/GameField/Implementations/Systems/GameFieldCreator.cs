@@ -3,6 +3,7 @@ using Common.Interfaces;
 using DataStorage.Interfaces;
 using GameField.Configs;
 using GameField.Data;
+using GameField.Implementations.Views;
 using GameField.Interfaces;
 using UnityEngine;
 
@@ -32,17 +33,15 @@ namespace GameField.Implementations.Systems
         }
 
         ///  <inheritdoc />
-        public IGameFieldGridView CreateGameField()
+        public IGameFieldGridView CreateGameField(GameFieldCreateParams createParams)
         {
             if(_gameFieldGridView == null)
             {
                 _gameFieldGridView = FirstCreateGameField();
                 _gameFieldInteractor.SetGameFieldGrid(_gameFieldGridView);
             }
-            else
-            {
-                ReactivateGameField();
-            }
+
+            ReactivateGameField(createParams);
 
             return _gameFieldGridView;
         }
@@ -57,14 +56,10 @@ namespace GameField.Implementations.Systems
             gameFieldGridView.Transform.localPosition = _gameFieldConfig.GameFieldGridPosition;
 
             var gameFieldCellViews = new List<IGameFieldCellView>();
-            var maxDeltaColor = _gameFieldConfig.EndCellColor - _gameFieldConfig.StartCellColor;
             for (int i = 0; i < _gameFieldConfig.GameFieldSize.x; i++)
             {
-                var deltaColorX = maxDeltaColor * i / (_gameFieldConfig.GameFieldSize.x - 1);
                 for (int j = 0; j < _gameFieldConfig.GameFieldSize.y; j++)
                 {
-                    var deltaColorY = maxDeltaColor * j / (_gameFieldConfig.GameFieldSize.y - 1);
-
                     var gameFieldCellView = GameObject.Instantiate(_gameFieldConfig.GameFieldCellViewPrefab, gameFieldGridView.CellsContainer);
                     gameFieldCellViews.Add(gameFieldCellView);
 
@@ -84,7 +79,6 @@ namespace GameField.Implementations.Systems
 
                     gameFieldCellView.SizableTransform.localScale = Vector2.one * _gameFieldConfig.GameFieldCellSize - Vector2.one * _gameFieldConfig.GameFieldCellPadding;
 
-                    gameFieldCellView.MainSpriteRenderer.color = _gameFieldConfig.StartCellColor + (deltaColorX + deltaColorY) * 0.5f;
                 }
             }
 
@@ -96,11 +90,20 @@ namespace GameField.Implementations.Systems
         /// <summary>
         /// Реактивировать игрокое поле
         /// </summary>
-        private void ReactivateGameField()
+        private void ReactivateGameField(GameFieldCreateParams createParams)
         {
+            var maxDeltaColor = createParams.EndCellColor - createParams.StartCellColor;
             for (int i = 0; i < _gameFieldGridView.CellViews.Count; i++)
             {
-                _gameFieldInteractor.SetCellActive(_gameFieldGridView.CellViews[i], true);
+                var cellView = _gameFieldGridView.CellViews[i];
+                _gameFieldInteractor.SetCellActive(cellView, true);
+
+                var isExplosive = i % createParams.ExplosiveCellStep == 0;
+                cellView.CellData.IsExplosive = isExplosive;
+                cellView.ExplosiveRoot.SetActive(isExplosive);
+                var deltaColorX = maxDeltaColor * cellView.CellData.GridPosition.x / (_gameFieldConfig.GameFieldSize.x - 1);
+                var deltaColorY = maxDeltaColor * cellView.CellData.GridPosition.y / (_gameFieldConfig.GameFieldSize.y - 1);
+                cellView.MainSpriteRenderer.color = createParams.StartCellColor + (deltaColorX + deltaColorY) * 0.5f;
             }
         }
     }

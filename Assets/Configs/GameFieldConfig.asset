@@ -18,5 +18,5 @@ MonoBehaviour:
   _gameFieldCellSize: {x: 1, y: 0.5}
   _gameFieldCellPadding: 0
   _gameFieldGridPosition: {x: 0, y: 5}
-  _startCellColor: {r: 0.9215687, g: 0.49803925, b: 0.5294118, a: 1}
-  _endCellColor: {r: 0.36078432, g: 0.3254902, b: 0.64705884, a: 1}
+  _gameFieldCellDestroyParticlesPrefab: {fileID: 6779013577321379072, guid: 1ebaf2812a360644b9e323dc9010ed99, type: 3}
+  _gameFieldCellExplosionParticlesPrefab: {fileID: 8949822563982691654, guid: 0305d0f0900967742962a7ed925c6823, type: 3}

@@ -109,7 +109,8 @@ namespace CoreGameLoop.Implementations.Systems
         {
             var gameScreen = _screenSystem.ShowScreen<IGameScreen>();
 
-            _gameFieldCreator.CreateGameField();
+            var levelConfigData = _coreGameLoopConfig.LevelConfigsData[(_level - 1) % _coreGameLoopConfig.LevelConfigsData.Length];
+            _gameFieldCreator.CreateGameField(levelConfigData.GameFieldCreateParams);
             _gameFieldInteractor.Restart();
             _racketSystem.CreateRacket();
             _ballCreator.CreateBall();

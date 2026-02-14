@@ -1,55 +1,28 @@
 ﻿using System;
-using Balls.Configs;
 using Balls.Interfaces;
-using Common.Interfaces;
 using GameField.Interfaces;
 using Racket.Interfaces;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static UnityEngine.ParticleSystem;
 
 namespace Balls.Implementations.Systems
 {
     ///  <inheritdoc />
     public class BallCollisionProcessor : IBallCollisionProcessor
     {
-        private IMainCamera _mainCamera;
-        private IBallInteractor _ballInteractor;
         private IBallCreator _ballCreator;
         private IGameFieldInteractor _gameFieldInteractor;
-        private IGameContainer _gameContainer;
-        private IMonoBehaviourPool<IGameFieldCellDestroyParticlesView> _gameFieldCellDestroyParticlesPool;
-
-        private BallsConfig _ballsConfig;
-
-        ///  <inheritdoc />
-        public Action<IGameFieldCellView> OnDestroyGameFieldCelLView { get; set; }
 
         /// <summary>
         /// Конструктор
         /// </summary>
-        public BallCollisionProcessor(IMainCamera mainCamera,
-            IBallInteractor ballInteractor,
-            IBallCreator ballCreator,
-            IGameFieldInteractor gameFieldInteractor,
-            IGameContainer gameContainer,
-            IMonoBehaviourPool<IGameFieldCellDestroyParticlesView> gameFieldCellDestroyParticlesPool,
-            BallsConfig ballsConfig)
+        public BallCollisionProcessor(IBallCreator ballCreator,
+            IGameFieldInteractor gameFieldInteractor)
         {
-            _mainCamera = mainCamera;
-            _ballInteractor = ballInteractor;
             _ballCreator = ballCreator;
             _gameFieldInteractor = gameFieldInteractor;
-            _gameContainer = gameContainer;
-            _gameFieldCellDestroyParticlesPool = gameFieldCellDestroyParticlesPool;
-
-            _ballsConfig = ballsConfig;
 
             _ballCreator.OnCreateBall += SubscribeToBall;
             _ballCreator.OnDestroyBall += UnsubscribeFromBall;
-
-            _gameFieldCellDestroyParticlesPool.SetPrefab(_ballsConfig.GameFieldCellDestroyParticlesPrefab);
-            _gameFieldCellDestroyParticlesPool.SetContainer(_gameContainer.CoreContainer);
         }
 
         /// <summary>
@@ -103,11 +76,9 @@ namespace Balls.Implementations.Systems
                 ballView.BallData.IsCanCollideY = false;
             }
 
-            CreateGameFieldCellDestroyParticles(collisionPosition);
-            _gameFieldInteractor.SetCellActive(gameFieldCellView, false);
+            _gameFieldInteractor.DestroyCellByBall(gameFieldCellView, collisionPosition);
 
             ballView.BallData.Speed += ballView.BallData.SpeedStep;
-            OnDestroyGameFieldCelLView?.Invoke(gameFieldCellView);
         }
 
         /// <summary>
@@ -141,26 +112,6 @@ namespace Balls.Implementations.Systems
                     ballView.Rigidbody2D.MovePosition(ballPosition);
                 }
             }
-        }
-
-        /// <summary>
-        /// Создать партиклы уничтожения игровой ячейки
-        /// </summary>
-        private void CreateGameFieldCellDestroyParticles(Vector3 position)
-        {
-            var particlesView = _gameFieldCellDestroyParticlesPool.GetFreeElement();
-            particlesView.Transform.position = position;
-            particlesView.OnParticleStop += DestroyGameFieldCellDestroyParticles;
-        }
-
-        /// <summary>
-        /// Уничтожить партиклы уничтожения игровой ячейки
-        /// </summary>
-        /// <param name="particlesView"></param>
-        private void DestroyGameFieldCellDestroyParticles(IParticlesView particlesView)
-        {
-            particlesView.OnParticleStop -= DestroyGameFieldCellDestroyParticles;
-            _gameFieldCellDestroyParticlesPool.Free(particlesView as IGameFieldCellDestroyParticlesView);
         }
     }
 }

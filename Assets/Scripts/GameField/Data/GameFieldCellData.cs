@@ -18,5 +18,10 @@ namespace GameField.Data
         /// Флаг активности
         /// </summary>
         public bool IsActive;
+
+        /// <summary>
+        /// Флаг взрываемости
+        /// </summary>
+        public bool IsExplosive;
     }
 }

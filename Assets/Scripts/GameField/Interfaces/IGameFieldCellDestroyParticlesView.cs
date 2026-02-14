@@ -1,6 +1,6 @@
 ﻿using Common.Interfaces;
 
-namespace Balls.Interfaces
+namespace GameField.Interfaces
 {
     /// <summary>
     /// Отображение частиц уничтожения ячейки поля

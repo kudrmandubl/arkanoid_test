@@ -8,9 +8,5 @@ namespace Balls.Interfaces
     /// </summary>
     public interface IBallCollisionProcessor
     {
-        /// <summary>
-        /// При уничтожении ячейки игрового поля
-        /// </summary>
-        Action<IGameFieldCellView> OnDestroyGameFieldCelLView { get; set; }
     }
 }

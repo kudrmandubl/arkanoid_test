@@ -23,6 +23,7 @@ namespace Buffs.Implementations.Systems
         private IMainCamera _mainCamera;
         private IRacketSystem _racketSystem;
         private IBallCreator _ballCreator;
+        private IGameFieldInteractor _gameFieldInteractor;
 
         private BuffsConfig _buffsConfig;
 
@@ -40,6 +41,7 @@ namespace Buffs.Implementations.Systems
             IMainCamera mainCamera,
             IRacketSystem racketSystem,
             IBallCreator ballCreator,
+            IGameFieldInteractor gameFieldInteractor,
             BuffsConfig buffsConfig)
         {
             _buffViewPool = buffViewPool;
@@ -50,6 +52,7 @@ namespace Buffs.Implementations.Systems
             _mainCamera = mainCamera;
             _racketSystem = racketSystem;
             _ballCreator = ballCreator;
+            _gameFieldInteractor = gameFieldInteractor;
 
             _buffsConfig = buffsConfig;
 
@@ -64,7 +67,7 @@ namespace Buffs.Implementations.Systems
         ///  <inheritdoc />
         public void Initialize()
         {
-            _ballCollisionProcessor.OnDestroyGameFieldCelLView += CreateBuff;
+            _gameFieldInteractor.OnGameFieldCellDestroyExtended+= CreateBuff;
         }
 
         ///  <inheritdoc />

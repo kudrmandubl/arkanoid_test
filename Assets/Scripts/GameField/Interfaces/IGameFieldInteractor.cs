@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using UnityEngine;
 
 namespace GameField.Interfaces
@@ -30,6 +29,11 @@ namespace GameField.Interfaces
         Action OnGameFieldCellDestroy { get; set; }
 
         /// <summary>
+        /// При уничтожении ячейки
+        /// </summary>
+        Action<IGameFieldCellView> OnGameFieldCellDestroyExtended { get; set; }
+
+        /// <summary>
         /// При уничтожении всех ячеек
         /// </summary>
         Action OnAllGameFieldCellDestroy { get; set; }
@@ -53,10 +57,30 @@ namespace GameField.Interfaces
         IGameFieldCellView GetCell(Vector2Int gridPosition);
 
         /// <summary>
+        /// Получить ячейку
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <returns>Ячейка</returns>
+        IGameFieldCellView GetCell(int x, int y);
+
+        /// <summary>
         /// Установить активность ячейки
         /// </summary>
         /// <param name="gameFieldCellView"></param>
         /// <param name="value"></param>
         void SetCellActive(IGameFieldCellView gameFieldCellView, bool value);
+
+        /// <summary>
+        /// Уничтожить ячейку
+        /// </summary>
+        /// <param name="gameFieldCellView"></param>
+        void DestroyCell(IGameFieldCellView gameFieldCellView);
+
+        /// <summary>
+        /// Уничтожить ячейку шариком
+        /// </summary>
+        /// <param name="gameFieldCellView"></param>
+        void DestroyCellByBall(IGameFieldCellView gameFieldCellView, Vector3 collisionPoisiton);
     }
 }
